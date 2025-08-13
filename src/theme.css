@@ -1,0 +1,12 @@
+/*********************************************
+* Light
+*********************************************/
+html body.light {
+    --background: #fffcf4;
+    --default: #262623;
+
+    --text-color-standard: var( --default );
+    --text-color-revert: white;
+
+    --line-grayscale: #9f9f9f;
+}

@@ -1,0 +1,111 @@
+<main>
+    @for ( span of [].constructor(4); track span ) { <span></span> }
+
+    <div class="content">
+        <div class="desktop">
+            <div class="account">
+                <div class="personal">
+                    <div class="information">
+                        <div class="avatar"></div>
+                        <div class="title">
+                            <h1>MEOR HAKIM</h1>
+                            <a href="">@thecodemeor</a>
+                        </div>
+                    </div>
+                    <div class="actionbar">
+                        <div class="button">
+                            <img src="assets/images/icons/email.svg" alt="email">
+                        </div>
+                        <div class="button">
+                            <img src="assets/images/icons/display.svg" alt="display">
+                        </div>
+                    </div>
+                </div>
+                <div class="description">
+                    <p>A personal showcase website featuring my creative masterpieces, including posters, logos, booklets, and 3D designs. This site serves as an online portfolio to highlight my best work in visual design and branding.</p>
+                </div>
+            </div>
+            <div class="files-directory">
+                <div class="toolbar">
+                    <div class="button" (click)="closeFolder()">
+                        @if ( currentpage != 'desktop' ) {
+                            <img src="assets/images/icons/chevron-left.svg" alt="back">
+                        }
+                    </div>
+                    <div class="breadcrumbs">
+                        <span>Desktop&nbsp;</span>
+                        @if ( currentpage != 'desktop' ) {
+                            <span><span style="color: #9f9f9f;">|</span>&nbsp; {{ currentpage | titlecase}}</span>
+                        }
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="grid">
+                        <!-- Base Layer =========================================================================== -->
+                        @if ( currentpage === 'desktop' ) {
+                            @for ( folder of foldersDesktop; track folder ) {
+                                <div class="folder" (click)="openFolder( folder.label )">
+                                    <div class="image-display">
+                                        <img src="assets/images/icons/folder.svg" class="afolder" alt="folder">
+                                    </div>
+                                    <p>{{ folder.label | titlecase }}</p>
+                                </div>
+                            }
+                        }
+
+                        <!-- Layer 1 ============================================================================== -->
+                        @if ( currentpage === 'poster' ) {
+                            @for ( file of foldersPoster; track file ) {
+                                <div class="folder" (click)="openFile( file )">
+                                    <div class="image-display">
+                                        <img [src]="file.imgfinder" class="image" alt="poster">
+                                    </div>
+                                    <p>{{ file.label | titlecase }}</p>
+                                </div>
+                            }
+                        }
+                        @if ( currentpage === 'logo' ) {
+                            @for ( file of foldersLogo; track file ) {
+                                <div class="folder" (click)="openFile( file )">
+                                    <div class="image-display">
+                                        <img [src]="file.imgfinder" class="image" alt="logo">
+                                    </div>
+                                    <p>{{ file.label | titlecase }}</p>
+                                </div>
+                            }
+                        }
+                        @if ( currentpage === 'modelling' ) {
+                            @for ( folder of foldersModelling; track folder ) {
+                                <div class="folder" (click)="openFile( folder.label )">
+                                    <div class="image-display">
+                                        <img [src]="'assets/images/works/logo/logo' + folder.label + '.png'" alt="folder">
+                                    </div>
+                                    <p>{{ folder.label | titlecase }}</p>
+                                </div>
+                            }
+                        }
+                        @if ( currentpage === 'booklet' ) {
+                            @for ( folder of foldersBooklet; track folder ) {
+                                <div class="folder" (click)="openFile( folder.label )">
+                                    <div class="image-display">
+                                        <img [src]="'assets/images/works/logo/logo' + folder.label + '.png'" alt="folder">
+                                    </div>
+                                    <p>Logo {{ folder.label | titlecase }}</p>
+                                </div>
+                            }
+                        }
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="display">
+            <img [src]="toDisplay" alt="Display">
+        </div>
+    </div>
+
+    <span></span><span></span>
+    <span class="version">
+        <p>V_{{ version }}&nbsp;&nbsp;|&nbsp;&nbsp;&copy; {{ licenseYear }}. All Rights Reserved</p>
+    </span><span></span>
+</main>

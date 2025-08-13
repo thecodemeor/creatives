@@ -1,0 +1,196 @@
+$spacing-1: 0.625rem;
+$spacing-2: 1.25rem;
+$gapline: 1px;
+:host {
+    .button {
+        background-color: var( --background );
+        cursor: pointer;
+        &:active {
+            transform-origin: 100% 100%;
+            scale: 0.95;
+        }
+    }
+    .version {
+        display: flex;
+        padding: 0 $spacing-1;
+        color: var(--line-grayscale);
+        justify-content: end;
+        align-items: center;
+        p { font-size: 0.5rem;}
+    }
+}
+main {
+    display: grid;
+    width: 100%; height: 100dvh;
+    background-color: var( --default );
+    grid-template-columns: $spacing-2 auto $spacing-2;
+    grid-template-rows: $spacing-2 auto $spacing-2;
+    gap: $gapline;
+    span { background-color: var( --background );}
+    .content {
+        display: flex;
+        width: 100%; height: 100%;
+        gap: $gapline;
+        @media ( max-width: 991px ) {
+            flex-direction: column;
+        }
+        .desktop {
+            display: flex;
+            width: 40%; height: 100%;
+            flex-direction: column;
+            gap: $gapline;
+            @media ( max-width: 991px ) { width: 100%;}
+            .account {
+                width: 100%; height: 13rem;
+                @media ( max-width: 991px ) { height: 10rem}
+                .personal {
+                    display: flex;
+                    width: 100%; height: 50%;
+                    gap: $gapline;
+                    @media ( max-width: 991px ) { height: 40%}
+                    .information {
+                        flex: 1 1 0;
+                        display: flex;
+                        width: 100%; height: 100%;
+                        padding: $spacing-2;
+                        background-color: var( --background );
+                        align-items: center;
+                        gap: $spacing-2;
+                        @media ( max-width: 991px ) { padding: $spacing-1 $spacing-2;}
+                        .avatar {
+                            height: 100%;
+                            aspect-ratio: 1 / 1;
+                            border: solid 1px var( --default );
+                            border-radius: 50%;
+                            background-image: url('src/assets/images/others/meor-pixar.jpg');
+                            background-size: cover;
+                            background-position: center 0;
+                        }
+                        .title {
+                            flex: 1 1 0;
+                            height: fit-content;
+                            h1 {
+                                font-family: "CutePixel", sans-serif;
+                                line-height: 2.8rem;
+                                @media ( max-width: 991px ) { line-height: 1.7rem;}
+                            }
+                            a {
+                                color: var( --line-grayscale );
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                    .actionbar {
+                        display: flex;
+                        width: fit-content; height: 100%;
+                        flex-direction: column;
+                        gap: $gapline;
+                        .button {
+                            flex: 1 1 0;
+                            display: flex;
+                            height: calc( 50% - ( $gapline ));
+                            aspect-ratio: 1 / 1;
+                            justify-content: center;
+                            align-items: center;
+                            img {
+                                width: auto; height: 60%;
+                            }
+                        }
+                    }
+                }
+                .description {
+                    width: 100%; height: 50%;
+                    padding: $spacing-2;
+                    border-right: solid 1px var( --line-grayscale );
+                    background-color: var( --default );
+                    @media ( max-width: 991px ) { height: 60%; padding: $spacing-1;}
+                    p {
+                        font-size: $spacing-1;
+                        color: white;
+                    }
+                }
+            }
+            .files-directory {
+                flex: 1 1 0;
+                display: flex;
+                width: 100%; height: auto;
+                background-color: var( --background );
+                flex-direction: column;
+                .toolbar {
+                    display: flex;
+                    width: 100%; height: fit-content;
+                    padding: $spacing-1;
+                    border-bottom: dotted $gapline var( --default );
+                    gap: $spacing-1;
+                    .button {
+                        height: 2rem;
+                        aspect-ratio: 1 / 1;
+                        img {
+                            width: auto; height: 100%;
+                        }
+                    }
+                    .breadcrumbs {
+                        flex: 1 1 0;
+                        display: flex;
+                        width: 100%;
+                        padding: 0 $spacing-2;
+                        border-left: dotted 1px var( --line-grayscale );
+                        align-items: center;
+                    }
+                }
+                .container {
+                    flex: 1 1 0;
+                    width: 100%; height: 100%;
+                    padding: $spacing-2;
+                    overflow-y: scroll;
+                    &::-webkit-scrollbar { width: 5px;}
+                    &::-webkit-scrollbar-thumb { background-color: var( --line-grayscale );}
+                    
+                    .grid {
+                        display: grid;
+                        width: 100%; height: fit-content;
+                        grid-template-columns: repeat( 4, minmax( 5rem, 1fr ));
+                        grid-auto-rows: auto;
+                        gap: $spacing-2;
+                        overflow: visible;
+                        @media ( max-width: 1098px ) { grid-template-columns: repeat( 3, minmax( 5rem, 1fr ));}
+                        @media ( max-width: 525px ) { grid-template-columns: repeat( 2, minmax( 5rem, 1fr ));}
+                        .folder {
+                            display: flex;
+                            width: 100%; height: auto;
+                            flex-direction: column;
+                            align-items: center;
+                            gap: $spacing-1;
+                            transition: all 0.1s;
+                            cursor: pointer;
+                            .image-display {
+                                flex: 1 1 0;
+                                display: flex;
+                                width: 100%; height: 100%;
+                                justify-content: center;
+                                align-items: center;
+                                img {
+                                    &.afolder { width: 60%; height: auto;}
+                                    &.image { width: 100%;}
+                                }
+                            }
+                            &:hover { scale: 1.06;}
+                            &:active { scale: 1;}
+                        }
+                    }
+                }
+            }
+        }
+        .display {
+            flex: 1 1 0;
+            display: flex;
+            width: 100%; height: 100%;
+            background-color: var( --background );
+            justify-content: center;
+            align-items: center;
+            @media ( max-width: 991px ) {
+                display: none;
+            }
+        }
+    }
+}

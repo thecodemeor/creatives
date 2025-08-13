@@ -34,10 +34,12 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/theme.css"
             ]
           },
           "configurations": {
@@ -93,9 +95,11 @@
                 "glob": "**/*",
                 "input": "public"
               }
+              ,"src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/theme.css"
             ]
           }
         }
