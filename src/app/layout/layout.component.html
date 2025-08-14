@@ -6,7 +6,12 @@
             <div class="account">
                 <div class="personal">
                     <div class="information">
-                        <div class="avatar"></div>
+                        <div class="avatar" [ngClass]="pixel ? 'pixelated' : ''" (click)="pixel = !pixel">
+                            <div class="chat">
+                                <img src="assets/images/others/stock/chat.svg" alt="Chat Ballon">
+                                <p>Hi!</p>
+                            </div>
+                        </div>
                         <div class="title">
                             <h1>MEOR HAKIM</h1>
                             <a href="">@thecodemeor</a>
@@ -22,7 +27,13 @@
                     </div>
                 </div>
                 <div class="description">
-                    <p>A personal showcase website featuring my creative masterpieces, including posters, logos, booklets, and 3D designs. This site serves as an online portfolio to highlight my best work in visual design and branding.</p>
+                    @if (true) {
+                        <p class="headline"><b>About</b></p>
+                        <p>A personal showcase website featuring my creative masterpieces, including posters, logos, booklets, and 3D designs. This site serves as an online portfolio to highlight my best work in visual design and branding.</p>
+                    }
+                    @if (true) {
+                        <div #lcdRow class="lcd-row"></div>
+                    }
                 </div>
             </div>
             <div class="files-directory">
@@ -100,7 +111,20 @@
             </div>
         </div>
         <div class="display">
-            <img [src]="toDisplay" alt="Display">
+            @if ( toDisplay !== '') {
+                <img [src]="toDisplay" alt="Display">
+            }
+            @else {
+                <div class="display-idle">
+                    <div class="text">
+                        <p>Your selected<br>file will display</p>
+                        <span class="bold">HERE</span>
+                    </div>
+                    <div class="bat-container">
+                        <div class="bat"></div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 

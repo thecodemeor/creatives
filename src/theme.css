@@ -5,6 +5,8 @@ html body.light {
     --background: #fffcf4;
     --default: #262623;
 
+    --primary: #3dc5ff;
+
     --text-color-standard: var( --default );
     --text-color-revert: white;
 

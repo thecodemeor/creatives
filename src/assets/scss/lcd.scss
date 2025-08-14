@@ -1,0 +1,16 @@
+.lcd-char {
+    display: flex;
+    width: 25px; height: 40px; /* 8 pixels * 5 (height multiplier) */
+    margin: 2px;
+    background-color: transparent;
+    flex-wrap: wrap;
+
+    .pixel {
+        width: 4px; height: 4px;
+        margin: 0.5px;
+        border-radius: 1px;
+        background-color: var( --background );
+        opacity: 0.1;
+        &.on { opacity: 1;}
+    }
+}
