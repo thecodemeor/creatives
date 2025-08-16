@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 649 570.5">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #9c6644;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #ddb892;
+      }
+
+      .cls-3 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <g>
+    <rect class="cls-3" x="28" width="206.5" height="28"/>
+    <polygon class="cls-3" points="649 81 649 542.5 621 542.5 621 165 84 165 84 137 621 137 621 109 532.5 109 532.5 81 234.5 81 234.5 28 262.5 28 262.5 53 560.5 53 560.5 81 649 81"/>
+    <rect class="cls-3" y="28" width="28" height="514.5"/>
+    <polygon class="cls-3" points="621 542.5 621 570.5 28 570.5 28 542.5 56 542.5 56 165 84 165 84 542.5 621 542.5"/>
+  </g>
+  <g>
+    <polygon class="cls-2" points="593 165 593 458.5 565 458.5 565 486.5 537 486.5 537 514.5 84 514.5 84 165 593 165"/>
+    <polygon class="cls-2" points="593 109 593 137 84 137 84 165 56 165 56 230 28 230 28 28 234.5 28 234.5 81 532.5 81 532.5 109 593 109"/>
+  </g>
+  <g>
+    <rect class="cls-1" x="593" y="109" width="28" height="28"/>
+    <polygon class="cls-1" points="621 165 621 542.5 84 542.5 84 514.5 537 514.5 537 486.5 565 486.5 565 458.5 593 458.5 593 165 621 165"/>
+    <rect class="cls-1" x="28" y="230" width="28" height="312.5"/>
+  </g>
+</svg>

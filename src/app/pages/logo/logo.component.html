@@ -1,0 +1,25 @@
+<app-toolbar [breadcrumbs]="breadcrumbs">
+    <div class="button" (click)="close()">
+        <img src="assets/images/icons/chevron-left.svg" alt="">
+    </div>
+</app-toolbar>
+<div class="container">
+    <div class="grid">
+        @for ( folder of folders; track folder ) {
+            <div class="folder" (click)="openFolder( folder.label )">
+                <div class="image-display">
+                    <img src="assets/images/others/stock/file.svg" class="afolder" alt="folder">
+                </div>
+                <p>{{ folder.label | titlecase }}</p>
+            </div>
+        }
+        @for ( file of files; track file ) {
+            <div class="folder" (click)="openFile( file )">
+                <div class="image-display">
+                    <img [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType" class="aimage" alt="image">
+                </div>
+                <p>{{ file.name | titlecase }}</p>
+            </div>
+        }
+    </div>
+</div>

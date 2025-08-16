@@ -1,0 +1,62 @@
+$spacing-1: 0.625rem;
+$spacing-2: 1.25rem;
+
+:host {
+    display: flex;
+    width: 100%; height: 100%;
+    flex-direction: column;
+    app-toolbar {
+        .button {
+            width: 100%; height: 100%;
+            cursor: pointer;
+            img {
+                width: auto; height: 100%;
+            }
+        }
+    }
+}
+
+.container {
+    flex: 1 1 0;
+    display: block;
+    width: 100%; height: 100%;
+    padding: $spacing-2;     
+    overflow-y: scroll;
+    &::-webkit-scrollbar { width: 5px;}
+    &::-webkit-scrollbar-thumb { background-color: var( --line-grayscale );}            
+    .grid {
+        display: grid;
+        width: 100%; height: fit-content;
+        grid-template-columns: repeat( 4, minmax( 5rem, 1fr ));
+        grid-auto-rows: auto;
+        gap: $spacing-2;
+        overflow: visible;
+        @media ( max-width: 1098px ) { grid-template-columns: repeat( 3, minmax( 5rem, 1fr ));}
+        @media ( max-width: 525px ) { grid-template-columns: repeat( 2, minmax( 5rem, 1fr ));}
+        .folder {
+            display: flex;
+            width: 100%; height: auto;
+            flex-direction: column;
+            align-items: center;
+            gap: $spacing-1;
+            transition: all 0.1s;
+            cursor: pointer;
+            .image-display {
+                flex: 1 1 0;
+                display: flex;
+                width: 100%; height: 100%;
+                justify-content: center;
+                align-items: center;
+                img {
+                    &.afolder { width: 60%; height: auto;}
+                    &.aimage {
+                        width: 100%;
+                        border: solid 1px var( --default );
+                    }
+                }
+            }
+            &:hover { scale: 1.06;}
+            &:active { scale: 1;}
+        }
+    }
+}

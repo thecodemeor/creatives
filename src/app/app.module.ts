@@ -13,7 +13,13 @@ import { AppComponent } from 'src/app/app.component';
 // --- Angular Material --- //
 
 // --- Extra Component --- //
+import { ToolbarComponent } from 'src/assets/components/toolbar.component';
+
+// --- Folder Component --- //
 import { Layout } from 'src/app/layout/layout.component';
+import { Work } from './pages/work/work.component';
+import { Poster } from './pages/poster/poster.component';
+import { Logo } from './pages/logo/logo.component';
 
 // --- Page List --- //
 
@@ -22,7 +28,14 @@ import { Layout } from 'src/app/layout/layout.component';
         AppComponent,
         Layout,
 
-        // Set
+        // Extra
+        ToolbarComponent,
+
+        // Folder
+        Work,
+        Poster,
+        Logo
+
     ],
     imports: [
         BrowserModule,

@@ -1,0 +1,13 @@
+<app-toolbar [breadcrumbs]="breadcrumbs"></app-toolbar>
+<div class="container">
+    <div class="grid">
+        @for ( folder of folders; track folder ) {
+            <div class="folder" (click)="openFolder( folder.label )">
+                <div class="image-display">
+                    <img src="assets/images/others/stock/file.svg" class="afolder" alt="folder">
+                </div>
+                <p>{{ folder.label | titlecase }}</p>
+            </div>
+        }
+    </div>
+</div>
