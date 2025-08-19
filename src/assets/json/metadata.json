@@ -126,13 +126,23 @@
             "children": [
                 {
                     "id": "1",
-                    "name": "Personal",
+                    "name": "Meorhakimz",
                     "folder": "work/logo",
                     "fileType": "svg",
                     "width": "800",
                     "height": "800",
                     "tools": [ "illustrator" ],
                     "colors": [ "#ffffff", "#262623" ]
+                },
+                {
+                    "id": "2",
+                    "name": "Rawanah",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": "800",
+                    "height": "800",
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#ffffff", "#262623", "#91b8d6","#148cc6", "#1765ae", "#134b75" ]
                 }
             ]
         },

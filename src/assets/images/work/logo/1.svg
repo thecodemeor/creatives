@@ -4,7 +4,6 @@
     <style>
       .cls-1 {
         fill: #262623;
-        stroke-width: 0px;
       }
 
       .cls-2 {
@@ -15,6 +14,6 @@
       }
     </style>
   </defs>
-  <circle class="cls-1" cx="400" cy="400" r="400"/>
-  <circle class="cls-2" cx="590" cy="215" r="200"/>
+  <circle class="cls-1" cx="400" cy="400" r="295.42"/>
+  <circle class="cls-2" cx="540.32" cy="263.37" r="147.71"/>
 </svg>
