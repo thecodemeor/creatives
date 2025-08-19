@@ -38,7 +38,17 @@ body {
 * { box-sizing: border-box;}
 
 .spacer { flex: 1 1 0}
-img { pointer-events: none;}
+img {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.folder {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
 .undermentainance {
     position: relative;
     filter: grayscale( 100 );

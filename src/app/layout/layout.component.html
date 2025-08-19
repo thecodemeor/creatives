@@ -1,11 +1,11 @@
 <main>
     <span></span><span></span><span></span><span></span>
 
-    <div class="content">
-        <div class="desktop">
-            <div class="account">
-                <div class="personal">
-                    <div class="information">
+    <div class="content" [ngClass]="responsive">
+        <div class="desktop" [ngClass]="responsive">
+            <div class="account" [ngClass]="responsive">
+                <div class="personal" [ngClass]="responsive">
+                    <div class="information" [ngClass]="responsive">
                         <div class="avatar" [ngClass]="pixel ? 'pixelated' : ''" (click)="pixel = !pixel">
                             <div class="chat">
                                 <img src="assets/images/others/stock/chat.svg" alt="Chat Ballon">
@@ -14,7 +14,7 @@
                             <div class="business-hour" [style.background-color]="businessHour() ? 'limegreen' : 'silver'"></div>
                         </div>
                         <div class="title">
-                            <h1>MEOR HAKIM</h1>
+                            <h1 [ngClass]="responsive">MEOR HAKIM</h1>
                             <a href="">@thecodemeor</a>
                         </div>
                     </div>
@@ -22,35 +22,49 @@
                         <div class="button" (click)="openExternal( 'email' )">
                             <img src="assets/images/icons/email.svg" alt="email">
                         </div>
-                        <div class="button">
-                            <img src="assets/images/icons/display.svg" alt="display">
+                        <div class="button" (click)="search = true">
+                            <img src="assets/images/icons/search.svg" alt="search">
                         </div>
                     </div>
                 </div>
-                <div class="description">
-                    @if (true) {
+                @if ( false ) {}
+                @else {
+                    <div class="description" [ngClass]="responsive">
                         <p class="headline"><b>About</b></p>
                         <p>A personal showcase website featuring my creative masterpieces, including posters, logos, booklets, and more. This to highlight my best work in visual design and branding.</p>
-                    }
-                    <!-- <div #lcdRow class="lcd-row"></div> -->
-                </div>
+                        <!-- <div #lcdRow class="lcd-row"></div> -->
+                    </div>
+                }
             </div>
             <div class="files-directory">
-                <router-outlet
-                    (activate)="onActivate( $event )"
-                    (deactivate)="onDeactivate()"
-                />
+                <app-pages (sendItem)="getItem( $event )"></app-pages>
             </div>
         </div>
-        <div class="display">
+        <div class="display" [ngClass]="responsive">
             @if ( toDisplay !== '') {
                 <!-- <img [src]="toDisplay" alt="Display"> -->
-                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')" [style]="sizeDisplay()">
                    <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <img [src]="toDisplay" alt="Display">
                         </div>
                         <div class="flip-card-back">
+                            <div class="tools">
+                                <div class="label">Tools</div>
+                                <span class="tools-list">
+                                    @for (tool of signal.tools; track tool) {
+                                        <img [src]="'assets/images/others/tools/' + tool + '.svg'" alt="tool">
+                                    }
+                                </span>
+                            </div>
+                            <div class="colors">
+                                <div class="label">Colors used</div>
+                                <span class="colors-list">
+                                    @for (color of signal.colors; track color) {
+                                        <div class="color-code" [style.background]="color"></div>
+                                    }
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +73,7 @@
                 <div class="display-idle">
                     <div class="text">
                         <p>Your selected<br>file will display</p>
-                        <span class="bold">HERE</span>
+                        <span class="bold">HERE!</span>
                     </div>
                     <div class="bat-container">
                         <div class="bat"></div>
@@ -73,4 +87,23 @@
     <span class="version">
         <p>V_{{ version }}&nbsp;&nbsp;|&nbsp;&nbsp;&copy; {{ licenseYear }}. All Rights Reserved</p>
     </span><span></span>
+
+    @if ( search ) {
+        <div class="dialog">
+            <div class="label">
+                <span class="header">
+                    <img src="assets/images/icons/search.svg" alt="search">
+                    <span>Search</span>
+                </span>
+                <div class="button" (click)="closeSearchbar()">
+                    <img src="assets/images/icons/close.svg" alt="close">
+                </div>
+            </div>
+            <div class="dialog-box">
+                <div class="search-box">
+                    <input type="text" [(ngModel)]="searchInput" placeholder="Type here...">
+                </div>
+            </div>
+        </div>
+    }
 </main>

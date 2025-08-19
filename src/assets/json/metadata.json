@@ -1,0 +1,149 @@
+{
+    "id": "root",
+    "name": "work",
+    "folder": "root",
+    "fileType": "root",
+    "children": [
+        {
+            "id": "1",
+            "name": "poster",
+            "folder": "work",
+            "fileType": "folder",
+            "children": [
+                {
+                    "id": "1",
+                    "name": "awareness",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": []
+                },
+                {
+                    "id": "2",
+                    "name": "business",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "3",
+                    "name": "car",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "4",
+                    "name": "education",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "5",
+                    "name": "event",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "6",
+                    "name": "fashion",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "7",
+                    "name": "food",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "8",
+                    "name": "inspire",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "9",
+                    "name": "movie",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "10",
+                    "name": "resume",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "11",
+                    "name": "sport",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "12",
+                    "name": "wedding",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "logo",
+            "folder": "work",
+            "fileType": "folder",
+            "children": [
+                {
+                    "id": "1",
+                    "name": "Personal",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": "800",
+                    "height": "800",
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#ffffff", "#262623" ]
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "booklet",
+            "folder": "work",
+            "fileType": "folder",
+            "children": [
+
+            ]
+        }
+    ]
+}

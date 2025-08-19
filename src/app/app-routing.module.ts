@@ -2,16 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // Folder
-import { Work } from './pages/work/work.component';
-import { Poster } from './pages/poster/poster.component';
-import { Logo } from './pages/logo/logo.component';
+import { Pages } from './pages/pages.component';
 
-const routes: Routes = [
-    { path: '', redirectTo: 'work', pathMatch: 'full' },
-    { path: 'work', component: Work },
-    { path: 'poster', component: Poster },
-    { path: 'logo', component: Logo },
-];
+const routes: Routes = [];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

@@ -5,7 +5,9 @@ html body.light {
     --background: #fffcf4;
     --default: #262623;
 
-    --primary: #3dc5ff;
+    --primary: #ddb892;
+    --primary-dark: #9c6644;
+    --blue: #3dc5ff;
 
     --text-color-standard: var( --default );
     --text-color-revert: white;
@@ -17,7 +19,9 @@ html body.dark {
     --background: #262623;
     --default: #fffcf4;
 
-    --primary: #3dc5ff;
+    --primary: #ddb892;
+    --primary-dark: #9c6644;
+    --blue: #3dc5ff;
 
     --text-color-standard: white;
     --text-color-revert: var( --default );

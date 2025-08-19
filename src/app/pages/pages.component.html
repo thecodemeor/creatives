@@ -1,16 +1,18 @@
 <app-toolbar [breadcrumbs]="breadcrumbs">
-    <div class="button" (click)="close()">
-        <img src="assets/images/icons/chevron-left.svg" alt="">
-    </div>
+    @if ( history.length > 1 ) {
+        <div class="button" (click)="close()">
+            <img src="assets/images/icons/menu-left.svg" alt="">
+        </div>
+    }
 </app-toolbar>
 <div class="container">
     <div class="grid">
         @for ( folder of folders; track folder ) {
-            <div class="folder" (click)="openFolder( folder.label )">
+            <div class="folder" (click)="openFolder( folder, true )">
                 <div class="image-display">
                     <img src="assets/images/others/stock/file.svg" class="afolder" alt="folder">
                 </div>
-                <p>{{ folder.label | titlecase }}</p>
+                <p>{{ folder.name | titlecase }}</p>
             </div>
         }
         @for ( file of files; track file ) {
@@ -22,4 +24,10 @@
             </div>
         }
     </div>
+    @if ( !folders.length && !files.length ) {
+        <div class="nodata">
+            <img src="assets/images/others/stock/construction.svg" alt="">
+            <span class="text">Coming Soon!</span>
+        </div>
+    }
 </div>

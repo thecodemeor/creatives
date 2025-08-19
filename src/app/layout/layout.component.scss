@@ -2,6 +2,7 @@ $spacing-1: 0.625rem;
 $spacing-2: 1.25rem;
 $gapline: 1px;
 :host {
+    width: 100dvw; height: 100dvh;
     .button {
         background-color: var( --background );
         cursor: pointer;
@@ -20,10 +21,11 @@ $gapline: 1px;
     }
 }
 main {
+    position: relative;
     display: grid;
-    width: 100%; height: 100dvh;
+    width: 100%; height: 100%;
     background-color: var( --default );
-    grid-template-columns: $spacing-2 auto $spacing-2;
+    grid-template-columns: $spacing-2 calc( 100% - 2.5rem - ( $gapline * 2 )) $spacing-2;
     grid-template-rows: $spacing-2 auto $spacing-2;
     gap: $gapline;
     span { background-color: var( --background );}
@@ -31,7 +33,7 @@ main {
         display: flex;
         width: 100%; height: 100%;
         gap: $gapline;
-        @media ( max-width: 991px ) {
+        &.mobile {
             flex-direction: column;
         }
         .desktop {
@@ -39,15 +41,15 @@ main {
             width: 40%; height: 100%;
             flex-direction: column;
             gap: $gapline;
-            @media ( max-width: 991px ) { width: 100%;}
+            &.mobile { width: 100%;}
             .account {
                 width: 100%; height: 13rem;
-                @media ( max-width: 991px ) { height: 10rem}
+                &.mobile { height: 10rem}
                 .personal {
                     display: flex;
                     width: 100%; height: 50%;
                     gap: $gapline;
-                    @media ( max-width: 991px ) { height: 40%}
+                    &.mobile { height: 40%}
                     .information {
                         flex: 1 1 0;
                         display: flex;
@@ -56,7 +58,7 @@ main {
                         background-color: var( --background );
                         align-items: center;
                         gap: $spacing-2;
-                        @media ( max-width: 991px ) { padding: $spacing-1 $spacing-2;}
+                        &.mobile { padding: $spacing-1 $spacing-2;}
                         .avatar {
                             position: relative;
                             height: 100%;
@@ -99,7 +101,7 @@ main {
                             h1 {
                                 font-family: "CutePixel", sans-serif;
                                 line-height: 2.8rem;
-                                @media ( max-width: 991px ) { line-height: 1.7rem;}
+                                &.mobile { line-height: 1.7rem;}
                             }
                             a {
                                 color: var( --line-grayscale );
@@ -129,14 +131,14 @@ main {
                     width: 100%; height: 50%;
                     padding: $spacing-2;
                     border-top: solid 1px var( --default );
-                    background-color: #262623;
-                    @media ( max-width: 991px ) { height: 60%; padding: $spacing-1;}
+                    background-color: var( --default );
+                    &.mobile { height: 60%; padding: $spacing-1;}
                     p {
                         font-size: $spacing-1;
                         color: white;
                         &.headline {
                             margin-bottom: 0.3rem;
-                            color: var( --primary );
+                            color: var( --blue );
                         }
                     }
                     .lcd-row {
@@ -177,12 +179,8 @@ main {
                 transform-style: flat;
                 pointer-events: none;
             }
-            @media ( max-width: 991px ) {
+            &.mobile {
                 display: none;
-            }
-            img {
-                border: solid 4px var( --default );
-                z-index: 1;
             }
             .flip-card {
                 width: 200px; height: 300px;
@@ -196,17 +194,41 @@ main {
                     .flip-card-front,
                     .flip-card-back {
                         position: absolute;
-                        display: flex;
                         width: 100%; height: 100%;
                         font-size: 20px;
                         color: white;
-                        justify-content: center;
-                        align-items: center;
+                        border: solid 4px var( --default );
                         backface-visibility: hidden;
                     }
                     .flip-card-back {
-                        background-color: #27ae60;
+                        display: flex;
+                        padding: $spacing-1 $spacing-2;
+                        background-color: var( --primary );
+                        flex-direction: column;
                         transform: rotateY( 180deg );
+                        .tools, .colors {
+                            width: 100%;
+                            margin-bottom: $spacing-2;
+                            .label {
+                                margin-bottom: $spacing-1;
+                                font-size: $spacing-1;
+                                font-weight: 600;
+                                color: var( --default );
+                            }
+                            .tools-list, .colors-list {
+                                display: flex;
+                                width: 100%; height: fit-content;
+                                background-color: var( --primary );
+                                gap: 0.2rem;
+                                img { width: auto; height: 2rem;}
+                                .color-code {
+                                    height: $spacing-2;
+                                    aspect-ratio: 1 / 1;
+                                    border: solid 2px var( --default );
+                                    border-radius: 50%;
+                                }
+                            }
+                        }
                     }
                 }
                 &.flipped {
@@ -229,6 +251,74 @@ main {
                     }
                 }
                 .bat-container { flex: 1 1 0;}
+            }
+        }
+    }
+}
+
+.dialog {
+    position: absolute;
+    top: 10dvh; left: 50%;
+    width: 35rem; height: 10dvh;
+    max-width: 90%;
+    background-color: var( --default );
+    transform: translateX( -50% );
+    animation: glowing-shadow 2s infinite linear;
+    @keyframes glowing-shadow {
+        0% { box-shadow: 0px 3px 0px var( --default ), 0px -3px 0px var( --default ), 3px 0px 0px var( --default ), -3px 0px 0px var( --default ), 0px 0px 0px 0px #00e1ff, 0px 0px 0px 10px #00b3ff;}
+        80% { box-shadow: 0px 3px 0px var( --default ), 0px -3px 0px var( --default ), 3px 0px 0px var( --default ), -3px 0px 0px var( --default ), 0px 0px 0px 10px #00e1ff, 0px 0px 0px 10px #00b3ff;}
+        100% { box-shadow: 0px 3px 0px var( --default ), 0px -3px 0px var( --default ), 3px 0px 0px var( --default ), -3px 0px 0px var( --default ), 0px 0px 0px 10px #00a0e500, 0px 0px 0px 10px #00b3ff;}
+    }
+    .label {
+        display: flex;
+        width: 100%; height: 45%;
+        span.header {
+            flex: 1 1 0;
+            display: flex;
+            width: 100%; height: 100%;
+            padding: 0 0 0 $spacing-2;
+            align-items: center;
+            background-color: var( --background );
+            gap: $spacing-2;
+            img { width: auto; height: 60%;}
+            span {
+                flex: 1 1 auto;
+                font-family: "CutePixel", sans-serif;
+                font-size: 1.8rem;
+            }
+        }
+        .button {
+            display: flex;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            border-left: solid 3px var( --default );
+            justify-content: center;
+            align-items: center;
+            img { width: auto; height: 60%;}
+        }
+    }
+    .dialog-box {
+        display: flex;
+        width: 100%; height: 55%;
+        border-top: solid 3px var( --default );
+        background-color: var( --default );
+        .search-box {
+            flex: 1 1 auto;
+            width: 100%; height: 100%;
+            background-color: white;
+            input {
+                width: 100%; height: 100%;
+                padding: $spacing-1 $spacing-2;
+                font-family: "Minecraftia", sans-serif;
+                font-size: 1rem;
+                color: var( --default );
+                border: none;
+                border-radius: 0;
+                outline: none;
+                &:focus {
+                    border: none;
+                    outline: none;
+                }
             }
         }
     }

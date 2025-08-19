@@ -14,12 +14,11 @@ import { AppComponent } from 'src/app/app.component';
 
 // --- Extra Component --- //
 import { ToolbarComponent } from 'src/assets/components/toolbar.component';
+import { DialogComponent } from 'src/assets/components/dialog.component';
 
 // --- Folder Component --- //
 import { Layout } from 'src/app/layout/layout.component';
-import { Work } from './pages/work/work.component';
-import { Poster } from './pages/poster/poster.component';
-import { Logo } from './pages/logo/logo.component';
+import { Pages } from './pages/pages.component';
 
 // --- Page List --- //
 
@@ -30,11 +29,10 @@ import { Logo } from './pages/logo/logo.component';
 
         // Extra
         ToolbarComponent,
+        DialogComponent,
 
         // Folder
-        Work,
-        Poster,
-        Logo
+        Pages
 
     ],
     imports: [
