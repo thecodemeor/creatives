@@ -6,7 +6,7 @@
     }
 </app-toolbar>
 <div class="container">
-    <div class="grid">
+    <div class="grid" [class]="responsive">
         @for ( folder of folders; track folder ) {
             <div class="folder" (click)="openFolder( folder, true )">
                 <div class="image-display">
@@ -20,7 +20,7 @@
                 <div class="image-display">
                     <img [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType" class="aimage" alt="image">
                 </div>
-                <p>{{ file.name | titlecase }}</p>
+                <p>{{ file.name }}</p>
             </div>
         }
     </div>

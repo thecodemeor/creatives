@@ -1,11 +1,30 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
 // Service
 import packageJson from '../../../package.json'
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { animate, svg, stagger } from 'animejs';
 
 // Accessory
 import { LCD } from 'src/assets/shared/lcd'
+
+interface MetadataFolder {
+    id: string;
+    name: string;
+    folder: string;
+    fileType: string;
+    children: MetadataFolder[] | MetadataImage[];
+}
+interface MetadataImage {
+    id: string;
+    name: string;
+    folder: string;
+    fileType: string;
+    width: number;
+    height: number;
+    tools: string[];
+    colors: string[];
+}
 
 @Component({
     selector: 'app-layout',
@@ -41,25 +60,50 @@ export class Layout implements OnInit {
             this.businessHour();
         }, 60000);
     }
+    ngAfterViewInit(): void {
+        animate('.info', {
+            translateY: { from: '-0.3rem'},
+            opacity: { from: 0 }
+        });
+    }
+    
 
     // *** Functions ************************************************** //
     signal: any
     toDisplay: string = ''
     getItem( file: any ) {
         this.signal = file
-        console.log( file.width, 'mcb')
         this.toDisplay = 'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType
     }
 
     sizeDisplay() {
-        const width = this.signal.width / 4
-        const height = this.signal.height / 4
+        let width
+        let height
+        if ( this.responsive === 'mobile' || this.responsive === 'mobile-landscape' ) {
+            width = this.signal.width / 4
+            height = this.signal.height / 4
+        } else {
+            width = this.signal.width / 2
+            height = this.signal.height / 2
+        }
         return `width: ${ width }px; height: ${ height }px;`
     }
 
     closeSearchbar() {
         this.searchInput = ''
         this.search = false
+    }
+
+    clearSignal() {
+        this.signal = []
+        this.toDisplay = ''
+    }
+
+    flipped() {
+        animate('.info', {
+            opacity: { to: 0 },
+            duration: 800
+        });
     }
 
     // *** Business Hour ************************************************** //

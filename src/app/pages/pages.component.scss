@@ -41,7 +41,7 @@ $spacing-2: 1.25rem;
     display: block;
     width: 100%; height: 100%;
     padding: $spacing-2;     
-    overflow-y: scroll;
+    overflow-y: auto;
     &::-webkit-scrollbar { width: 5px;}
     &::-webkit-scrollbar-thumb { background-color: var( --line-grayscale );}            
     .grid {
@@ -51,8 +51,8 @@ $spacing-2: 1.25rem;
         grid-auto-rows: auto;
         gap: $spacing-2;
         overflow: visible;
-        @media ( max-width: 1098px ) { grid-template-columns: repeat( 3, minmax( 5rem, 1fr ));}
-        @media ( max-width: 525px ) { grid-template-columns: repeat( 2, minmax( 5rem, 1fr ));}
+        &.tablet{ grid-template-columns: repeat( 3, minmax( 5rem, 1fr ));}
+        &.mobile, &.mobile-landscape  { grid-template-columns: repeat( 2, minmax( 5rem, 1fr ));}
         .folder {
             display: flex;
             width: 100%; height: auto;
@@ -74,6 +74,13 @@ $spacing-2: 1.25rem;
                         box-shadow: 0px 3px 0px var( --default ), 0px -3px 0px var( --default ), 3px 0px 0px var( --default ), -3px 0px 0px var( --default );
                     }
                 }
+            }
+            p {
+                width: 100%; 
+                white-space: nowrap;
+                text-align: center;
+                text-overflow: ellipsis; 
+                overflow: hidden;
             }
             &:hover { scale: 1.06;}
             &:active { scale: 1;}

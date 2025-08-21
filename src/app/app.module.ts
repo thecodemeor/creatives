@@ -19,6 +19,7 @@ import { DialogComponent } from 'src/assets/components/dialog.component';
 // --- Folder Component --- //
 import { Layout } from 'src/app/layout/layout.component';
 import { Pages } from './pages/pages.component';
+import { Views } from './views/views.component';
 
 // --- Page List --- //
 
@@ -32,7 +33,8 @@ import { Pages } from './pages/pages.component';
         DialogComponent,
 
         // Folder
-        Pages
+        Pages,
+        Views
 
     ],
     imports: [

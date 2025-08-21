@@ -1,0 +1,17 @@
+<div class="header">
+    <h6>{{ allSearch.length }} found</h6>
+</div>
+<div class="container">
+    <div class="list">
+        @for ( file of allSearch; track file ) {
+            <div class="button folder" (click)="openFile( file )">
+                <div class="image-display">
+                    <img [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType" class="afolder" alt="image">
+                </div>
+                <p>{{ file.name }}</p>
+                <span class="spacer"></span>
+                <p>{{ file.folder }}</p>
+            </div>
+        }
+    </div>
+</div>

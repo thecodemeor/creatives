@@ -129,8 +129,8 @@
                     "name": "Meorhakimz",
                     "folder": "work/logo",
                     "fileType": "svg",
-                    "width": "800",
-                    "height": "800",
+                    "width": 800,
+                    "height": 800,
                     "tools": [ "illustrator" ],
                     "colors": [ "#ffffff", "#262623" ]
                 },
@@ -139,10 +139,70 @@
                     "name": "Rawanah",
                     "folder": "work/logo",
                     "fileType": "svg",
-                    "width": "800",
-                    "height": "800",
+                    "width": 800,
+                    "height": 800,
                     "tools": [ "illustrator" ],
                     "colors": [ "#ffffff", "#262623", "#91b8d6","#148cc6", "#1765ae", "#134b75" ]
+                },
+                {
+                    "id": "3",
+                    "name": "Razak Coffee",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#2c1111" ]
+                },
+                {
+                    "id": "4",
+                    "name": "Arfa Lab",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#ffffff", "#13a89e" ]
+                },
+                {
+                    "id": "5",
+                    "name": "Spot",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#ffffff", "#9b383a", "#2d2e75", "#31a248" ]
+                },
+                {
+                    "id": "6",
+                    "name": "Dapur Acik",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#ffffff", "#fcb34b", "#d81b5c", "#d1d1d3", "#bd1e2d" ]
+                },
+                {
+                    "id": "7",
+                    "name": "ME Club",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#bf1e2d" ]
+                },
+                {
+                    "id": "8",
+                    "name": "Paid Chain",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#3e4b55", "#58ae47" ]
                 }
             ]
         },

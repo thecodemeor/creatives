@@ -1,12 +1,12 @@
 <main>
     <span></span><span></span><span></span><span></span>
 
-    <div class="content" [ngClass]="responsive">
-        <div class="desktop" [ngClass]="responsive">
-            <div class="account" [ngClass]="responsive">
-                <div class="personal" [ngClass]="responsive">
-                    <div class="information" [ngClass]="responsive">
-                        <div class="avatar" [ngClass]="pixel ? 'pixelated' : ''" (click)="pixel = !pixel">
+    <div class="content" [class]="responsive">
+        <div class="desktop" [class]="responsive">
+            <div class="account" [class]="responsive">
+                <div class="personal" [class]="responsive">
+                    <div class="information" [class]="responsive">
+                        <div class="avatar" [ngClass]="[ pixel ? 'pixelated' : '', responsive ]" (click)="pixel = !pixel">
                             <div class="chat">
                                 <img src="assets/images/others/stock/chat.svg" alt="Chat Ballon">
                                 <p>{{ businessHour() ? 'Hi!' : 'Zzz' }}</p>
@@ -14,7 +14,7 @@
                             <div class="business-hour" [style.background-color]="businessHour() ? 'limegreen' : 'silver'"></div>
                         </div>
                         <div class="title">
-                            <h1 [ngClass]="responsive">MEOR HAKIM</h1>
+                            <h1 [class]="responsive">MEOR HAKIM</h1>
                             <a href="">@thecodemeor</a>
                         </div>
                     </div>
@@ -27,23 +27,66 @@
                         </div>
                     </div>
                 </div>
-                @if ( false ) {}
-                @else {
-                    <div class="description" [ngClass]="responsive">
-                        <p class="headline"><b>About</b></p>
-                        <p>A personal showcase website featuring my creative masterpieces, including posters, logos, booklets, and more. This to highlight my best work in visual design and branding.</p>
-                        <!-- <div #lcdRow class="lcd-row"></div> -->
-                    </div>
-                }
+                <div class="description" [class]="responsive">
+                    <p class="headline"><b>About</b></p>
+                    <p>A personal showcase website featuring my creative masterpieces, including posters, logos, booklets, and more. This to highlight my best work in visual design and branding.</p>
+                    <!-- <div #lcdRow class="lcd-row"></div> -->
+                </div>
             </div>
             <div class="files-directory">
-                <app-pages (sendItem)="getItem( $event )"></app-pages>
+                @if (( responsive === 'mobile' || responsive === 'mobile-landscape' ) && toDisplay !== '' ) {
+                    <div class="display responsive" [class]="responsive">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')" (click)="flipped()" [style]="sizeDisplay()">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img [src]="toDisplay" alt="Display">
+                                </div>
+                                <div class="flip-card-back">
+                                    <div class="name">{{ signal.name }}</div>
+                                    <div class="tools">
+                                        <div class="label">Tools</div>
+                                        <span class="tools-list">
+                                            @for (tool of signal.tools; track tool) {
+                                                <img [src]="'assets/images/others/tools/' + tool + '.svg'" alt="tool">
+                                            }
+                                        </span>
+                                    </div>
+                                    <div class="colors">
+                                        <div class="label">Colors used</div>
+                                        <span class="colors-list">
+                                            @for (color of signal.colors; track color) {
+                                                <div class="color-code" [style.background]="color"></div>
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info">
+                                <span class="info-text">Click</span>
+                                <img src="assets/images/others/stock/arrow.svg" alt="handwriting arrow">
+                            </div>
+                        </div>
+                        <div class="close">
+                            <div class="button" (click)="clearSignal()">
+                                <img src="assets/images/icons/close.svg" alt="search">
+                            </div>
+                        </div>
+                    </div>
+                }
+                @else {
+                    @if ( searchInput !== '' ) {
+                        <app-views [data]="searchInput" (sendItem)="getItem( $event )"></app-views>
+                    }
+                    @else {
+                        <app-pages (sendItem)="getItem( $event )"></app-pages>
+                    }
+                }
             </div>
         </div>
-        <div class="display" [ngClass]="responsive">
-            @if ( toDisplay !== '') {
-                <!-- <img [src]="toDisplay" alt="Display"> -->
-                <div class="flip-card" onclick="this.classList.toggle('flipped')" [style]="sizeDisplay()">
+        <div class="display" [class]="responsive">
+            @if ( toDisplay !== '' ) {
+                <div class="flip-card" onclick="this.classList.toggle('flipped')" (click)="flipped()" [style]="sizeDisplay()">
                    <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <img [src]="toDisplay" alt="Display">
@@ -68,6 +111,11 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="info">
+                        <span class="info-text">Click to flip</span>
+                        <img src="assets/images/others/stock/arrow.svg" alt="handwriting arrow">
+                    </div>
                 </div>
             }
             @else {
@@ -81,6 +129,12 @@
                     </div>
                 </div>
             }
+            <div class="close">
+                <div class="button" (click)="clearSignal()">
+                    <img src="assets/images/icons/close.svg" alt="search">
+                </div>
+            </div>
+
         </div>
     </div>
 

@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Component, OnInit, Output, EventEmitter, inject } from '@angular/core';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
 // JSON Data Base
 import allFolder from 'src/assets/json/metadata.json';
@@ -13,14 +12,32 @@ import allFolder from 'src/assets/json/metadata.json';
 })
 export class Pages implements OnInit {
     @Output() sendItem = new EventEmitter< string >();
-
-    breadcrumbs: string = ''
+    
+    private breakpointObserver = inject( BreakpointObserver );
     constructor () {}
-
+    
     folders: any[] = []
     files: any[] = []
     history: any[] = []
+    breadcrumbs: string = ''
+    responsive: string = ''
     ngOnInit() {
+        this.breakpointObserver.observe([
+            Breakpoints.HandsetPortrait,
+            Breakpoints.HandsetLandscape,
+            Breakpoints.TabletPortrait
+        ])
+        .subscribe( result => {
+            if ( result.breakpoints[ Breakpoints.HandsetPortrait ]) {
+                this.responsive = 'mobile'
+            } else if ( result.breakpoints[ Breakpoints.HandsetLandscape ]) {
+                this.responsive = 'mobile-landscape'
+            } else if ( result.breakpoints[ Breakpoints.TabletPortrait ]) {
+                this.responsive = 'tablet'
+            } else {
+                this.responsive = ''
+            }
+        });
         this.openFolder( allFolder, true );
     }
     
