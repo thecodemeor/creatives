@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: .14em;
+      }
+
+      .cls-2 {
+        letter-spacing: .14em;
+      }
+
+      .cls-3 {
+        letter-spacing: .15em;
+      }
+
+      .cls-4 {
+        letter-spacing: .14em;
+      }
+
+      .cls-5 {
+        letter-spacing: .15em;
+      }
+
+      .cls-6 {
+        fill: #f4931e;
+      }
+
+      .cls-7 {
+        fill: #455566;
+      }
+
+      .cls-8 {
+        font-family: AlongSanss2-ExtraBoldItalic, 'Along Sans s2';
+        font-size: 85.21px;
+        font-style: italic;
+        font-weight: 700;
+      }
+
+      .cls-9 {
+        fill: #748699;
+      }
+
+      .cls-10 {
+        letter-spacing: .09em;
+      }
+
+      .cls-11 {
+        letter-spacing: .12em;
+      }
+    </style>
+  </defs>
+  <g>
+    <path class="cls-6" d="M544.42,278.31l-7.61,28.4s-5.87-35.5-72.15-35.5h-140.85c-39.22,0-71.01-31.79-71.01-71.01h0s234.44,0,234.44,0c43.13,0,68.74,34.97,57.18,78.11Z"/>
+    <path class="cls-7" d="M536.81,306.71h-.01c-.37-.77-12.98-24.85-64.33-24.85.26-.95.38-1.87.38-2.76,0-1.7-.45-3.24-1.29-4.5h0c-1.39-2.09-3.82-3.39-6.89-3.39,66.28,0,72.15,35.5,72.15,35.5Z"/>
+    <path class="cls-9" d="M536.81,306.71c-8.41,31.37-40.66,56.81-72.03,56.81h-63.91l-22.84,85.21h-71.01l41.87-156.22h110.06c5.88,0,11.93-4.77,13.51-10.65,51.35,0,63.97,24.09,64.33,24.84h.01Z"/>
+  </g>
+  <text class="cls-8" transform="translate(123.23 574.24)"><tspan class="cls-5" x="0" y="0">E</tspan><tspan class="cls-11" x="65.27" y="0">A</tspan><tspan class="cls-4" x="140.6" y="0">S</tspan><tspan class="cls-1" x="207.4" y="0">Y</tspan><tspan class="cls-10" x="277.28" y="0">P</tspan><tspan class="cls-2" x="344.08" y="0">A</tspan><tspan class="cls-3" x="420.6" y="0">RK</tspan></text>
+</svg>

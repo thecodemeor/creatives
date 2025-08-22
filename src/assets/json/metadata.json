@@ -15,7 +15,18 @@
                     "name": "awareness",
                     "folder": "work/poster",
                     "fileType": "folder",
-                    "children": []
+                    "children": [
+                        {
+                            "id": "1",
+                            "name": "Climate Action",
+                            "folder": "work/poster/awareness",
+                            "fileType": "png",
+                            "width": 900,
+                            "height": 1262.18,
+                            "tools": [ "illustrator" ],
+                            "colors": []
+                        }
+                    ]
                 },
                 {
                     "id": "2",
@@ -46,7 +57,7 @@
                 },
                 {
                     "id": "5",
-                    "name": "event",
+                    "name": "fashion",
                     "folder": "work/poster",
                     "fileType": "folder",
                     "children": [
@@ -55,7 +66,7 @@
                 },
                 {
                     "id": "6",
-                    "name": "fashion",
+                    "name": "festival",
                     "folder": "work/poster",
                     "fileType": "folder",
                     "children": [
@@ -203,6 +214,46 @@
                     "height": 800,
                     "tools": [ "illustrator" ],
                     "colors": [ "#3e4b55", "#58ae47" ]
+                },
+                {
+                    "id": "9",
+                    "name": "Kerongsang K",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#ffab57", "#879376", "#c02030", "#ffe8d7" ]
+                },
+                {
+                    "id": "10",
+                    "name": "Easypark",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#748699", "#455566", "#f4931e" ]
+                },
+                {
+                    "id": "11",
+                    "name": "Zahrah Scarf",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator", "photoshop" ],
+                    "colors": [ "#000000", "#553147", "#a15385", "#9a6a29", "#d49c2b" ]
+                },
+                {
+                    "id": "12",
+                    "name": "Go Malaysia",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#4f893e", "#204474", "#71c6e8", "#eebe20" ]
                 }
             ]
         },
