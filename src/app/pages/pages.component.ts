@@ -21,7 +21,9 @@ export class Pages implements OnInit {
     history: any[] = []
     breadcrumbs: string = ''
     responsive: string = ''
+    loading: boolean = true
     ngOnInit() {
+        this.loading = true
         this.breakpointObserver.observe([
             Breakpoints.HandsetPortrait,
             Breakpoints.HandsetLandscape,
@@ -39,6 +41,9 @@ export class Pages implements OnInit {
             }
         });
         this.openFolder( allFolder, true );
+        setTimeout(() => {
+            this.loading = false
+        }, 400);
     }
     
     // *** Functions ************************************ //
@@ -52,6 +57,7 @@ export class Pages implements OnInit {
     }
 
     openFolder( folder: any, add: boolean ) {
+        this.loading = true
         if ( add ) { this.history.push( folder );}
 
         this.folders = []
@@ -71,6 +77,9 @@ export class Pages implements OnInit {
                 this.breadcrumbs = this.breadcrumbs.substring( 0, this.breadcrumbs.lastIndexOf( "/" ))
                 break;
         }
+        setTimeout(() => {
+            this.loading = false
+        }, 800);
     }
 
     openFile( file: string ) {

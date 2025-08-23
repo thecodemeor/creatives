@@ -38,6 +38,7 @@ $spacing-2: 1.25rem;
 
 .container {
     flex: 1 1 0;
+    position: relative;
     display: block;
     width: 100%; height: 100%;
     padding: $spacing-2;     
@@ -85,5 +86,14 @@ $spacing-2: 1.25rem;
             &:hover { scale: 1.06;}
             &:active { scale: 1;}
         }
+    }
+    .loading-container {
+        position: absolute;
+        top: 0; left: 0;
+        display: flex;
+        width: 100%; height: 100%;
+        background-color: var( --background );
+        justify-content: center;
+        align-items: center;
     }
 }

@@ -155,6 +155,7 @@ main {
             }
             .files-directory {
                 flex: 1 1 0;
+                position: relative;
                 display: flex;
                 width: 100%; height: auto;
                 background-color: var( --background );
@@ -284,7 +285,10 @@ main {
                 }
             }
             &.responsive {
+                position: absolute;
+                top: 0; left: 0;
                 display: flex;
+                z-index: 10;
                 .flip-card {
                     cursor: pointer;
                     .flip-card-inner {

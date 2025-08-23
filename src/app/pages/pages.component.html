@@ -6,6 +6,11 @@
     }
 </app-toolbar>
 <div class="container">
+    @if ( loading ) {
+        <div class="loading-container">
+            <l-mirage size="100" speed="2.5" color="#9c6644" ></l-mirage>
+        </div>
+    }
     <div class="grid" [class]="responsive">
         @for ( folder of folders; track folder ) {
             <div class="folder" (click)="openFolder( folder, true )">
@@ -24,6 +29,7 @@
             </div>
         }
     </div>
+
     @if ( !folders.length && !files.length ) {
         <div class="nodata">
             <img src="assets/images/others/stock/construction.svg" alt="">

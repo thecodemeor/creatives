@@ -74,13 +74,11 @@
                         </div>
                     </div>
                 }
+                @if ( searchInput !== '' ) {
+                    <app-views [data]="searchInput" (sendItem)="getItem( $event )"></app-views>
+                }
                 @else {
-                    @if ( searchInput !== '' ) {
-                        <app-views [data]="searchInput" (sendItem)="getItem( $event )"></app-views>
-                    }
-                    @else {
-                        <app-pages (sendItem)="getItem( $event )"></app-pages>
-                    }
+                    <app-pages (sendItem)="getItem( $event )"></app-pages>
                 }
             </div>
         </div>
