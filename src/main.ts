@@ -1,6 +1,8 @@
 import { platformBrowser } from '@angular/platform-browser';
 import { AppModule } from './app/app.module';
-import 'ldrs/mirage';
+import { mirage } from 'ldrs';
+
+mirage.register();
 
 platformBrowser().bootstrapModule(AppModule, {
   ngZoneEventCoalescing: true,
