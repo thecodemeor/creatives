@@ -170,7 +170,9 @@ main {
             background-color: var( --background );
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-y: auto;
+            &::-webkit-scrollbar { width: 5px;}
+            &::-webkit-scrollbar-thumb { background-color: var( --line-grayscale );}     
             &::before {
                 --size: 45px;
                 --line: color-mix( in hsl, canvasText, transparent 80% );
@@ -363,7 +365,7 @@ main {
 .dialog {
     position: absolute;
     top: 10dvh; left: 50%;
-    width: 35rem; height: 10dvh;
+    width: 35rem; height: 11dvh;
     max-width: 90%;
     background-color: var( --default );
     transform: translateX( -50% );
@@ -375,7 +377,7 @@ main {
     }
     .label {
         display: flex;
-        width: 100%; height: 45%;
+        width: 100%; height: 55%;
         span.header {
             flex: 1 1 0;
             display: flex;
@@ -403,7 +405,7 @@ main {
     }
     .dialog-box {
         display: flex;
-        width: 100%; height: 55%;
+        width: 100%; height: 45%;
         border-top: solid 3px var( --default );
         background-color: var( --default );
         .search-box {

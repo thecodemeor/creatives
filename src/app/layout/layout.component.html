@@ -34,39 +34,53 @@
                 </div>
             </div>
             <div class="files-directory">
-                @if (( responsive === 'mobile' || responsive === 'mobile-landscape' ) && toDisplay !== '' ) {
+                @if (( responsive === 'mobile' || responsive === 'mobile-landscape' ) && toDisplay !== '' || ( responsive === 'mobile' || responsive === 'mobile-landscape' ) && booklet.length !== 0 ) {
                     <div class="display responsive" [class]="responsive">
-                        <div class="flip-card" onclick="this.classList.toggle('flipped')" (click)="flipped()" [style]="sizeDisplay()">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <img [src]="toDisplay" alt="Display">
-                                </div>
-                                <div class="flip-card-back">
-                                    <div class="name">{{ signal.name }}</div>
-                                    <div class="tools">
-                                        <div class="label">Tools</div>
-                                        <span class="tools-list">
-                                            @for (tool of signal.tools; track tool) {
-                                                <img [src]="'assets/images/others/tools/' + tool + '.svg'" alt="tool">
-                                            }
-                                        </span>
+                        @if ( toDisplay !== '' && booklet.length === 0 ) {
+                            <div class="flip-card" onclick="this.classList.toggle('flipped')" (click)="flipped()" [style]="sizeDisplay()">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <img [src]="toDisplay" alt="Display">
                                     </div>
-                                    <div class="colors">
-                                        <div class="label">Colors used</div>
-                                        <span class="colors-list">
-                                            @for (color of signal.colors; track color) {
-                                                <div class="color-code" [style.background]="color"></div>
-                                            }
-                                        </span>
+                                    <div class="flip-card-back">
+                                        <div class="name">{{ signal.name }}</div>
+                                        <div class="tools">
+                                            <div class="label">Tools</div>
+                                            <span class="tools-list">
+                                                @for (tool of signal.tools; track tool) {
+                                                    <img [src]="'assets/images/others/tools/' + tool + '.svg'" alt="tool">
+                                                }
+                                            </span>
+                                        </div>
+                                        <div class="colors">
+                                            <div class="label">Colors used</div>
+                                            <span class="colors-list">
+                                                @for (color of signal.colors; track color) {
+                                                    <div class="color-code" [style.background]="color"></div>
+                                                }
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="info">
-                                <span class="info-text">Click</span>
-                                <img src="assets/images/others/stock/arrow.svg" alt="handwriting arrow">
+                                <div class="info">
+                                    <span class="info-text">Click</span>
+                                    <img src="assets/images/others/stock/arrow.svg" alt="handwriting arrow">
+                                </div>
                             </div>
-                        </div>
+                        }
+                        @if ( booklet.length !== 0 && toDisplay === '' ) {
+                            <app-book
+                                [images]="booklet"
+                                [pages]="pages"
+                                [width]="420"
+                                [height]="300"
+                                [cycleSec]="25"
+                                [scale]="1.2"
+                                [class]="responsive"
+                            >
+                            </app-book>
+                        }
                         <div class="close">
                             <div class="button" (click)="clearSignal()">
                                 <img src="assets/images/icons/close.svg" alt="search">
@@ -116,7 +130,17 @@
                     </div>
                 </div>
             }
-            @else {
+            @if ( booklet.length !== 0 ) {
+                <app-book
+                    [images]="booklet"
+                    [pages]="pages"
+                    [width]="420"
+                    [height]="300"
+                    [cycleSec]="25"
+                    [scale]="1.2">
+                </app-book>
+            }
+            @if ( booklet.length === 0 && toDisplay === '' ) {
                 <div class="display-idle">
                     <div class="text">
                         <p>Your selected<br>file will display</p>

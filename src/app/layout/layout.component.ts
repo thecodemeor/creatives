@@ -71,9 +71,32 @@ export class Layout implements OnInit {
     // *** Functions ************************************************** //
     signal: any
     toDisplay: string = ''
+    booklet: any[] =  []
+    pages: any[] = []
     getItem( file: any ) {
+        this.toDisplay = ''
+        this.booklet = []
+        this.pages = []
         this.signal = file
-        this.toDisplay = 'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType
+        if ( file.folder === 'work/booklet' ) {
+            const name = file.name.replace(/\s+/g, '').toLowerCase()
+            const pageMerge = file.pages / 2
+            for ( let i = 0; i < file.pages; i++ ) {
+                let id = i + 1
+                this.pages.push( 'assets/images/work/booklet/' + name + '/' + id + '.svg' )
+            }
+            for ( let i = 0; i < pageMerge; i++ ) {
+                let id = i + 1
+                this.booklet.push( 'assets/images/work/booklet/' + name + '/book/' + id + '.png' )
+            }
+        } else {
+            this.toDisplay = 'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType
+        }
+    }
+    clearSignal() {
+        this.signal = []
+        this.toDisplay = ''
+        this.booklet = []
     }
 
     sizeDisplay() {
@@ -92,11 +115,6 @@ export class Layout implements OnInit {
     closeSearchbar() {
         this.searchInput = ''
         this.search = false
-    }
-
-    clearSignal() {
-        this.signal = []
-        this.toDisplay = ''
     }
 
     flipped() {

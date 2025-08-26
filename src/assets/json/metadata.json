@@ -22,7 +22,7 @@
                             "folder": "work/poster/awareness",
                             "fileType": "png",
                             "width": 900,
-                            "height": 1262.18,
+                            "height": 1255,
                             "tools": [ "illustrator" ],
                             "colors": []
                         }
@@ -48,33 +48,24 @@
                 },
                 {
                     "id": "4",
-                    "name": "education",
-                    "folder": "work/poster",
-                    "fileType": "folder",
-                    "children": [
-
-                    ]
-                },
-                {
-                    "id": "5",
-                    "name": "fashion",
-                    "folder": "work/poster",
-                    "fileType": "folder",
-                    "children": [
-
-                    ]
-                },
-                {
-                    "id": "6",
                     "name": "festival",
                     "folder": "work/poster",
                     "fileType": "folder",
                     "children": [
-
+                        {
+                            "id": "1",
+                            "name": "Eid Fitri",
+                            "folder": "work/poster/festival",
+                            "fileType": "png",
+                            "width": 900,
+                            "height": 784,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        }
                     ]
                 },
                 {
-                    "id": "7",
+                    "id": "5",
                     "name": "food",
                     "folder": "work/poster",
                     "fileType": "folder",
@@ -83,43 +74,35 @@
                     ]
                 },
                 {
-                    "id": "8",
+                    "id": "6",
                     "name": "inspire",
                     "folder": "work/poster",
                     "fileType": "folder",
                     "children": [
-
+                        {
+                            "id": "1",
+                            "name": "Mindset",
+                            "folder": "work/poster/inspire",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "2",
+                            "name": "Stay Strong",
+                            "folder": "work/poster/inspire",
+                            "fileType": "png",
+                            "width": 992,
+                            "height": 1162,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        }
                     ]
                 },
                 {
-                    "id": "9",
-                    "name": "movie",
-                    "folder": "work/poster",
-                    "fileType": "folder",
-                    "children": [
-
-                    ]
-                },
-                {
-                    "id": "10",
-                    "name": "resume",
-                    "folder": "work/poster",
-                    "fileType": "folder",
-                    "children": [
-
-                    ]
-                },
-                {
-                    "id": "11",
-                    "name": "sport",
-                    "folder": "work/poster",
-                    "fileType": "folder",
-                    "children": [
-
-                    ]
-                },
-                {
-                    "id": "12",
+                    "id": "7",
                     "name": "wedding",
                     "folder": "work/poster",
                     "fileType": "folder",
@@ -263,7 +246,15 @@
             "folder": "work",
             "fileType": "folder",
             "children": [
-
+                {
+                    "id": "1",
+                    "name": "Diet Ideas",
+                    "folder": "work/booklet",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "pages": 6
+                }
             ]
         }
     ]

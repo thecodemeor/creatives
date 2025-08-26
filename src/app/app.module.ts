@@ -15,6 +15,7 @@ import { AppComponent } from 'src/app/app.component';
 // --- Extra Component --- //
 import { ToolbarComponent } from 'src/assets/components/toolbar.component';
 import { DialogComponent } from 'src/assets/components/dialog.component';
+import { BookComponent } from 'src/assets/components/book.component';
 
 // --- Folder Component --- //
 import { Layout } from 'src/app/layout/layout.component';
@@ -31,6 +32,7 @@ import { Views } from './views/views.component';
         // Extra
         ToolbarComponent,
         DialogComponent,
+        BookComponent,
 
         // Folder
         Pages,
