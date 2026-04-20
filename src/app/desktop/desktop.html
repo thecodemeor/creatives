@@ -1,0 +1,157 @@
+<div class="work-container">
+    <div class="header-card">
+        <div class="title">
+            <app-decrypted-text
+                text="PIXÖRE"
+                [speed]="50"
+                [maxIterations]="10"
+                [sequential]="true"
+                revealDirection="start"
+                animateOn="inViewHover"
+            ></app-decrypted-text>
+        </div>
+        <div class="description">
+            <div class="line"></div>
+            <p>A personal showcase website featuring my creative masterpieces.</p>
+        </div>
+    </div>
+
+    @if (searchInput.trim() !== '') {
+        <div class="toolbar">
+            <div class="container-button" (click)="this.searchInput = ''">
+                <img src="assets/images/icons/close.svg" alt="Close Icon">
+            </div>
+            <p>{{ allSearch.length }} found</p>
+        </div>
+        <div class="container">
+            <div class="grid">
+                @for (file of allSearch; track file.id) {
+                    <div class="file" (click)="openFile(file)">
+                        <div class="image-display">
+                            <img [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType" class="afolder" alt="image">
+                        </div>
+                        <p>{{ file.name }}</p>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    @else {
+        <app-toolbar [breadcrumbs]="breadcrumbs">
+            @if (history.length > 1) {
+                <div class="button" (click)="back()">
+                    <img src="assets/images/icons/menu-left.svg" alt="">
+                </div>
+            }
+        </app-toolbar>
+        <div class="container">
+            @if (folders.length) {
+                @for (folder of folders; track folder.id ?? folder.name) {
+                    <div class="folder" (click)="openFolder(folder, true)">
+                        <div class="image-display"></div>
+                        <p>{{ folder.name | titlecase }}</p>
+                    </div>
+                }
+            }
+            <div class="grid">
+                @for (file of files; track file.id) {
+                    <div class="file" (click)="openFile(file)">
+                        <div class="image-display">
+                            <img [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType" class="aimage" alt="image">
+                        </div>
+                        <p>
+                            <app-decrypted-text
+                                [text]="file.name"
+                                [speed]="50"
+                                [maxIterations]="10"
+                                [sequential]="true"
+                                revealDirection="start"
+                                animateOn="hover"
+                            ></app-decrypted-text>
+                        </p>
+                    </div>
+                }
+            </div>
+
+            @if (!folders.length && !files.length) {
+                <div class="nodata">
+                    <div class="hazard-outer">
+                        <div class="hazard-inner">
+                            <p>Coming Soon!</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<div class="divider"></div>
+
+<div class="display-container">
+    @if (isLoading) {
+        <div class="display-loader">
+            <div class="spinner"></div>
+            <p>Loading preview...</p>
+        </div>
+    }
+
+    @if (toDisplay !== '') {
+        <div class="display-wrap" [class.is-loading]="isLoading">
+            <div class="name">{{ signal.name }}</div>
+            <img
+                [src]="toDisplay"
+                alt="Display"
+                (load)="onDisplayLoad()"
+                (error)="onDisplayError()"
+            >
+        </div>
+    }
+
+    @if (booklet.length !== 0) {
+        <app-book
+            [images]="booklet"
+            [pages]="pages"
+            [width]="420"
+            [height]="300"
+            [cycleSec]="25"
+            [scale]="1.2">
+        </app-book>
+    }
+
+    @if (booklet.length === 0 && toDisplay === '') {
+        <div class="display-idle">
+            <img class="icon-logo" src="assets/images/website-logo/logo.svg" alt="Pixore Logo">
+            <div class="search-wrap">
+                <div class="search-label">Search the image you are looking for.</div>
+                <div class="search-input">
+                    <img src="assets/images/icons/search.svg" alt="">
+                    <input
+                        type="text"
+                        [(ngModel)]="searchInput"
+                        (ngModelChange)="filterPackage($event)"
+                        placeholder="Search here..."
+                    >
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (booklet.length !== 0 || toDisplay !== '') {
+        <div class="close" (click)="close()">
+            <img src="assets/images/icons/close.svg" alt="Close Icon">
+        </div>
+    }
+
+    <div class="version">
+        <p>V_{{ version }}&nbsp;&nbsp;|&nbsp;&nbsp;&copy; 2026. All Rights Reserved</p>
+    </div>
+</div>
+
+<app-noise
+    [patternSize]="250"
+    [patternScaleX]="1"
+    [patternScaleY]="1"
+    [patternRefreshInterval]="2"
+    [patternAlpha]="15"
+></app-noise>
