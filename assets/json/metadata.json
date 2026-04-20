@@ -1,0 +1,261 @@
+{
+    "id": "root",
+    "name": "work",
+    "folder": "root",
+    "fileType": "root",
+    "children": [
+        {
+            "id": "1",
+            "name": "poster",
+            "folder": "work",
+            "fileType": "folder",
+            "children": [
+                {
+                    "id": "1",
+                    "name": "awareness",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+                        {
+                            "id": "1",
+                            "name": "Climate Action",
+                            "folder": "work/poster/awareness",
+                            "fileType": "png",
+                            "width": 900,
+                            "height": 1255,
+                            "tools": [ "illustrator" ],
+                            "colors": []
+                        }
+                    ]
+                },
+                {
+                    "id": "2",
+                    "name": "business",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "3",
+                    "name": "car",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "4",
+                    "name": "festival",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+                        {
+                            "id": "1",
+                            "name": "Eid Fitri",
+                            "folder": "work/poster/festival",
+                            "fileType": "png",
+                            "width": 900,
+                            "height": 784,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        }
+                    ]
+                },
+                {
+                    "id": "5",
+                    "name": "food",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                },
+                {
+                    "id": "6",
+                    "name": "inspire",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+                        {
+                            "id": "1",
+                            "name": "Mindset",
+                            "folder": "work/poster/inspire",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "2",
+                            "name": "Stay Strong",
+                            "folder": "work/poster/inspire",
+                            "fileType": "png",
+                            "width": 992,
+                            "height": 1162,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        }
+                    ]
+                },
+                {
+                    "id": "7",
+                    "name": "wedding",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "logo",
+            "folder": "work",
+            "fileType": "folder",
+            "children": [
+                {
+                    "id": "1",
+                    "name": "Meorhakimz",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#ffffff", "#262623" ]
+                },
+                {
+                    "id": "2",
+                    "name": "Rawanah",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#ffffff", "#262623", "#91b8d6","#148cc6", "#1765ae", "#134b75" ]
+                },
+                {
+                    "id": "3",
+                    "name": "Razak Coffee",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#2c1111" ]
+                },
+                {
+                    "id": "4",
+                    "name": "Arfa Lab",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#ffffff", "#13a89e" ]
+                },
+                {
+                    "id": "5",
+                    "name": "Spot",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#ffffff", "#9b383a", "#2d2e75", "#31a248" ]
+                },
+                {
+                    "id": "6",
+                    "name": "Dapur Acik",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#ffffff", "#fcb34b", "#d81b5c", "#d1d1d3", "#bd1e2d" ]
+                },
+                {
+                    "id": "7",
+                    "name": "ME Club",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#bf1e2d" ]
+                },
+                {
+                    "id": "8",
+                    "name": "Paid Chain",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#3e4b55", "#58ae47" ]
+                },
+                {
+                    "id": "9",
+                    "name": "Kerongsang K",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#ffab57", "#879376", "#c02030", "#ffe8d7" ]
+                },
+                {
+                    "id": "10",
+                    "name": "Easypark",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#748699", "#455566", "#f4931e" ]
+                },
+                {
+                    "id": "11",
+                    "name": "Zahrah Scarf",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator", "photoshop" ],
+                    "colors": [ "#000000", "#553147", "#a15385", "#9a6a29", "#d49c2b" ]
+                },
+                {
+                    "id": "12",
+                    "name": "Go Malaysia",
+                    "folder": "work/logo",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "tools": [ "illustrator" ],
+                    "colors": [ "#000000", "#4f893e", "#204474", "#71c6e8", "#eebe20" ]
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "booklet",
+            "folder": "work",
+            "fileType": "folder",
+            "children": [
+                {
+                    "id": "1",
+                    "name": "Diet Ideas",
+                    "folder": "work/booklet",
+                    "fileType": "svg",
+                    "width": 800,
+                    "height": 800,
+                    "pages": 6
+                }
+            ]
+        }
+    ]
+}
