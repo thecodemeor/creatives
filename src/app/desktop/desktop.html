@@ -50,6 +50,11 @@
                     <div class="folder" (click)="openFolder(folder, true)">
                         <div class="image-display"></div>
                         <p>{{ folder.name | titlecase }}</p>
+                        <div class="spacer"></div>
+                        <p class="item-length">
+                            {{ folder.children.length }} 
+                            {{ folder.children.length > 1 ? 'items' : 'item'}}
+                        </p>
                     </div>
                 }
             }
@@ -121,7 +126,8 @@
 
     @if (booklet.length === 0 && toDisplay === '') {
         <div class="display-idle">
-            <img class="icon-logo" src="assets/images/website-logo/logo.svg" alt="Pixore Logo">
+            <!-- <img class="icon-logo" src="assets/images/website-logo/logo.svg" alt="Pixore Logo"> -->
+            <app-logo></app-logo>
             <div class="search-wrap">
                 <div class="search-label">Search the image you are looking for.</div>
                 <div class="search-input">

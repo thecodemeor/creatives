@@ -6,6 +6,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { LogoComponent } from 'src/assets/shared/logo/logo.component';
 import { NoiseComponent } from 'src/assets/shared/noise';
 import { DecryptedTextComponent } from 'src/assets/shared/decrypted-text';
 import { ToolbarComponent } from 'src/assets/shared/toolbar';
@@ -23,7 +24,8 @@ import allFolder from 'src/assets/json/metadata.json';
         NoiseComponent,
         DecryptedTextComponent,
         ToolbarComponent,
-        BookComponent
+        BookComponent,
+        LogoComponent
     ],
     templateUrl: './desktop.html',
     styleUrl: './desktop.scss',

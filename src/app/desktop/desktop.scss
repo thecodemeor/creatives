@@ -131,7 +131,10 @@ $corner-pill: 999px;
                 margin-bottom: calc($size-padding-outer * 2);
             }
 
-            p { font-size: 0.8rem;}
+            p {
+                font-size: 0.8rem;
+                &.item-length { font-size: 0.5rem;}
+            }
 
             &:hover { background-color: color-mix(in srgb, $matcha-400 40%, transparent);}
         }
