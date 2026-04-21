@@ -57,37 +57,36 @@
                     <p>{{ folder.name | titlecase }}</p>
                     <div class="spacer"></div>
                     <p class="item-length">
-                        {{ folder.children.length }}
-                        {{ folder.children.length > 1 ? 'items' : 'item' }}
+                        {{ folder.children.length }} 
+                        {{ folder.children.length > 1 ? 'items' : 'item'}}
                     </p>
                 </div>
             }
         }
 
-        @if (files.length) {
-            @if (loadedImages < files.length) {
-                <div class="loading">
-                    <app-loading></app-loading>
+        <div class="grid">
+            @for (file of files; track file.id) {
+                <div class="file" (click)="openFile(file)">
+                    <div class="image-display">
+                        <img
+                            [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType"
+                            class="aimage"
+                            alt="image"
+                        >
+                    </div>
+                    <p>
+                        <app-decrypted-text
+                            [text]="file.name"
+                            [speed]="50"
+                            [maxIterations]="10"
+                            [sequential]="true"
+                            revealDirection="start"
+                            animateOn="hover"
+                        ></app-decrypted-text>
+                    </p>
                 </div>
             }
-
-            <div class="grid" [class.grid-hidden]="loadedImages < files.length">
-                @for (file of files; track file.id) {
-                    <div class="file" (click)="openFile(file)">
-                        <div class="image-display">
-                            <img
-                                [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType"
-                                class="aimage"
-                                alt="image"
-                                (load)="onAssetLoad()"
-                                (error)="onAssetLoad()"
-                            >
-                        </div>
-                        <p>{{ file.name }}</p>
-                    </div>
-                }
-            </div>
-        }
+        </div>
 
         @if (!folders.length && !files.length) {
             <div class="nodata">
@@ -113,10 +112,22 @@
             (click)="$event.stopPropagation()"
         >
             <div class="dialog-image-wrap">
+                @if (isImageLoading) {
+                    <div class="dialog-loader">
+                        <div class="progress-bar">
+                            <div class="indicator" [style.width]="displayProgress + '%'"></div>
+                        </div>
+                        <p>{{ displayProgress }}%</p>
+                    </div>
+                }
+
                 <img
-                    [src]="getFileImage(selectedFile)"
+                    [src]="selectedFile.preview || getFileImage(selectedFile)"
                     [alt]="selectedFile.name"
                     class="dialog-image"
+                    [class.hidden]="isImageLoading"
+                    (load)="onDialogImageLoad()"
+                    (error)="onDialogImageError()"
                 >
             </div>
 

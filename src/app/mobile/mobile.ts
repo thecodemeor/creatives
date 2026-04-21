@@ -1,9 +1,10 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 import { DecryptedTextComponent } from 'src/assets/shared/decrypted-text';
 import { ToolbarComponent } from 'src/assets/shared/toolbar';
-import { Loading } from 'src/assets/components/loading';
 
 import allFolder from 'src/assets/json/metadata.json';
 
@@ -13,13 +14,12 @@ import allFolder from 'src/assets/json/metadata.json';
     imports: [
         CommonModule,
         DecryptedTextComponent,
-        ToolbarComponent,
-        Loading
+        ToolbarComponent
     ],
     templateUrl: './mobile.html',
     styleUrl: './mobile.scss',
 })
-export class Mobile implements OnInit {
+export class Mobile implements OnInit, OnDestroy {
     folders: any[] = [];
     files: any[] = [];
     history: any[] = [];
@@ -31,10 +31,20 @@ export class Mobile implements OnInit {
     isDialogOpen = false;
     selectedFile: any = null;
 
-    loadedImages = 0;
+    isImageLoading = false;
+    displayProgress = 0;
+
+    private imageSub?: Subscription;
+    private objectUrl?: string;
+
+    constructor(private http: HttpClient) {}
 
     ngOnInit(): void {
         this.openFolder(allFolder, true);
+    }
+
+    ngOnDestroy(): void {
+        this.cleanupDialogImage();
     }
 
     openFolder(folder: any, add: boolean): void {
@@ -44,7 +54,6 @@ export class Mobile implements OnInit {
 
         this.folders = [];
         this.files = [];
-        this.loadedImages = 0;
 
         for (const item of folder.children) {
             if (
@@ -74,14 +83,61 @@ export class Mobile implements OnInit {
     }
 
     openFile(file: any): void {
-        this.selectedFile = file;
+        this.cleanupDialogImage();
+
+        this.selectedFile = { ...file, preview: '' };
         this.isDialogOpen = true;
+        this.isImageLoading = true;
+        this.displayProgress = 0;
+
         document.body.style.overflow = 'hidden';
+
+        const url = this.getFileImage(file);
+
+        this.imageSub = this.http.get(url, {
+            responseType: 'blob',
+            observe: 'events',
+            reportProgress: true
+        }).subscribe({
+            next: (event) => {
+                if (event.type === HttpEventType.DownloadProgress) {
+                    if (event.total) {
+                        this.displayProgress = Math.round(
+                            (event.loaded / event.total) * 100
+                        );
+                    } else {
+                        this.displayProgress = Math.min(this.displayProgress + 8, 95);
+                    }
+                }
+
+                if (event.type === HttpEventType.Response) {
+                    const blob = event.body;
+                    if (!blob) {
+                        this.onDialogImageError();
+                        return;
+                    }
+
+                    this.objectUrl = URL.createObjectURL(blob);
+                    this.selectedFile = {
+                        ...file,
+                        preview: this.objectUrl
+                    };
+                    this.displayProgress = 100;
+                }
+            },
+            error: () => {
+                this.onDialogImageError();
+            }
+        });
     }
 
     closeDialog(): void {
         this.isDialogOpen = false;
+        this.isImageLoading = false;
+        this.displayProgress = 0;
         document.body.style.overflow = '';
+
+        this.cleanupDialogImage();
 
         setTimeout(() => {
             this.selectedFile = null;
@@ -92,10 +148,14 @@ export class Mobile implements OnInit {
         return `assets/images/${file.folder}/${file.id}.${file.fileType}`;
     }
 
-    onAssetLoad(): void {
-        if (this.loadedImages < this.files.length) {
-            this.loadedImages++;
-        }
+    onDialogImageLoad(): void {
+        this.isImageLoading = false;
+        this.displayProgress = 100;
+    }
+
+    onDialogImageError(): void {
+        this.isImageLoading = false;
+        this.displayProgress = 0;
     }
 
     back(): void {
@@ -112,6 +172,18 @@ export class Mobile implements OnInit {
     onEscapeKey(): void {
         if (this.isDialogOpen) {
             this.closeDialog();
+        }
+    }
+
+    private cleanupDialogImage(): void {
+        if (this.imageSub) {
+            this.imageSub.unsubscribe();
+            this.imageSub = undefined;
+        }
+
+        if (this.objectUrl) {
+            URL.revokeObjectURL(this.objectUrl);
+            this.objectUrl = undefined;
         }
     }
 }
