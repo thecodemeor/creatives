@@ -65,7 +65,7 @@
         }
 
         @if (files.length) {
-            @if (loadedImages < files.length || true) {
+            @if (loadedImages < files.length) {
                 <div class="loading">
                     <app-loading></app-loading>
                     <p>{{ loadedImages }} / {{ files.length }}</p>
