@@ -122,7 +122,7 @@
             (click)="$event.stopPropagation()"
         >
             <div class="dialog-image-wrap">
-                @if (isImageLoading || true) {
+                @if (isImageLoading) {
                     <div class="dialog-loader">
                         <div class="progress-bar">
                             <div class="indicator" [style.width]="displayProgress + '%'"></div>
