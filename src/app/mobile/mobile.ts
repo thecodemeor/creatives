@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 
 import { DecryptedTextComponent } from 'src/assets/shared/decrypted-text';
 import { ToolbarComponent } from 'src/assets/shared/toolbar';
+import { Loading } from 'src/assets/components/loading';
 
 import allFolder from 'src/assets/json/metadata.json';
 
@@ -14,7 +15,8 @@ import allFolder from 'src/assets/json/metadata.json';
     imports: [
         CommonModule,
         DecryptedTextComponent,
-        ToolbarComponent
+        ToolbarComponent,
+        Loading
     ],
     templateUrl: './mobile.html',
     styleUrl: './mobile.scss',
@@ -30,6 +32,8 @@ export class Mobile implements OnInit, OnDestroy {
 
     isDialogOpen = false;
     selectedFile: any = null;
+
+    loadedImages = 0;
 
     isImageLoading = false;
     displayProgress = 0;
@@ -54,6 +58,7 @@ export class Mobile implements OnInit, OnDestroy {
 
         this.folders = [];
         this.files = [];
+        this.loadedImages = 0;
 
         for (const item of folder.children) {
             if (
@@ -146,6 +151,20 @@ export class Mobile implements OnInit, OnDestroy {
 
     getFileImage(file: any): string {
         return `assets/images/${file.folder}/${file.id}.${file.fileType}`;
+    }
+
+    onAssetLoad(): void {
+        if (this.loadedImages < this.files.length) {
+            this.loadedImages++;
+        }
+    }
+
+    get loadingPercent(): number {
+        if (!this.files.length) {
+            return 0;
+        }
+
+        return Math.round((this.loadedImages / this.files.length) * 100);
     }
 
     onDialogImageLoad(): void {
