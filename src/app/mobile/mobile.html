@@ -57,36 +57,38 @@
                     <p>{{ folder.name | titlecase }}</p>
                     <div class="spacer"></div>
                     <p class="item-length">
-                        {{ folder.children.length }} 
-                        {{ folder.children.length > 1 ? 'items' : 'item'}}
+                        {{ folder.children.length }}
+                        {{ folder.children.length > 1 ? 'items' : 'item' }}
                     </p>
                 </div>
             }
         }
 
-        <div class="grid">
-            @for (file of files; track file.id) {
-                <div class="file" (click)="openFile(file)">
-                    <div class="image-display">
-                        <img
-                            [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType"
-                            class="aimage"
-                            alt="image"
-                        >
-                    </div>
-                    <p>
-                        <app-decrypted-text
-                            [text]="file.name"
-                            [speed]="50"
-                            [maxIterations]="10"
-                            [sequential]="true"
-                            revealDirection="start"
-                            animateOn="hover"
-                        ></app-decrypted-text>
-                    </p>
+        @if (files.length) {
+            @if (loadedImages < files.length || true) {
+                <div class="loading">
+                    <app-loading></app-loading>
+                    <p>{{ loadedImages }} / {{ files.length }}</p>
                 </div>
             }
-        </div>
+
+            <div class="grid" [class.grid-hidden]="loadedImages < files.length">
+                @for (file of files; track file.id) {
+                    <div class="file" (click)="openFile(file)">
+                        <div class="image-display">
+                            <img
+                                [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType"
+                                class="aimage"
+                                alt="image"
+                                (load)="onAssetLoad()"
+                                (error)="onAssetLoad()"
+                            >
+                        </div>
+                        <p>{{ file.name }}</p>
+                    </div>
+                }
+            </div>
+        }
 
         @if (!folders.length && !files.length) {
             <div class="nodata">
@@ -121,19 +123,11 @@
 
             <div class="dialog-body">
                 <h2 class="dialog-title">{{ selectedFile.name }}</h2>
-
             </div>
         </div>
+
         <div class="close" (click)="closeDialog()">
             <img src="assets/images/icons/close.svg" alt="Close Icon">
         </div>
     </div>
 }
-
-<app-noise
-    [patternSize]="250"
-    [patternScaleX]="1"
-    [patternScaleY]="1"
-    [patternRefreshInterval]="2"
-    [patternAlpha]="15"
-></app-noise>

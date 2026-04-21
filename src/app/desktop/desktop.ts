@@ -1,16 +1,20 @@
 import {
     Component,
     OnInit,
-    AfterViewInit
+    AfterViewInit,
+    OnDestroy
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 import { LogoComponent } from 'src/assets/shared/logo/logo.component';
 import { NoiseComponent } from 'src/assets/shared/noise';
 import { DecryptedTextComponent } from 'src/assets/shared/decrypted-text';
 import { ToolbarComponent } from 'src/assets/shared/toolbar';
 import { BookComponent } from 'src/assets/shared/book';
+import { Loading } from 'src/assets/components/loading';
 
 import packageJson from '../../../package.json';
 import allFolder from 'src/assets/json/metadata.json';
@@ -25,12 +29,13 @@ import allFolder from 'src/assets/json/metadata.json';
         DecryptedTextComponent,
         ToolbarComponent,
         BookComponent,
-        LogoComponent
+        LogoComponent,
+        Loading
     ],
     templateUrl: './desktop.html',
     styleUrl: './desktop.scss',
 })
-export class Desktop implements OnInit, AfterViewInit {
+export class Desktop implements OnInit, AfterViewInit, OnDestroy {
     version: string = packageJson.version;
 
     folders: any[] = [];
@@ -48,6 +53,13 @@ export class Desktop implements OnInit, AfterViewInit {
     allPackage: any = allFolder.children;
 
     isLoading = false;
+    loadedImages = 0;
+
+    displayProgress = 0;
+    private displayRequestSub?: Subscription;
+    private objectUrl?: string;
+
+    constructor(private http: HttpClient) {}
 
     ngOnInit(): void {
         this.openFolder(allFolder, true);
@@ -56,6 +68,11 @@ export class Desktop implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {}
 
+    ngOnDestroy(): void {
+        this.cleanupDisplayRequest();
+        this.revokeObjectUrl();
+    }
+
     openFolder(folder: any, add: boolean): void {
         if (add) {
             this.history.push(folder);
@@ -63,6 +80,7 @@ export class Desktop implements OnInit, AfterViewInit {
 
         this.folders = [];
         this.files = [];
+        this.loadedImages = 0;
 
         for (const item of folder.children) {
             if (item.fileType === 'folder') {
@@ -83,11 +101,15 @@ export class Desktop implements OnInit, AfterViewInit {
     }
 
     openFile(file: any): void {
+        this.cleanupDisplayRequest();
+        this.revokeObjectUrl();
+
         this.toDisplay = '';
         this.booklet = [];
         this.pages = [];
         this.signal = file;
         this.isLoading = true;
+        this.displayProgress = 0;
 
         if (file.folder === 'work/booklet') {
             const name = file.name.replace(/\s+/g, '').toLowerCase();
@@ -103,19 +125,64 @@ export class Desktop implements OnInit, AfterViewInit {
                 this.booklet.push(`assets/images/work/booklet/${name}/book/${id}.png`);
             }
 
-            // app-book has no load output yet, so don't keep loader stuck
             this.isLoading = false;
-        } else {
-            this.toDisplay = `assets/images/${file.folder}/${file.id}.${file.fileType}`;
+            this.displayProgress = 100;
+            return;
         }
+
+        const url = `assets/images/${file.folder}/${file.id}.${file.fileType}`;
+
+        this.displayRequestSub = this.http.get(url, {
+            responseType: 'blob',
+            observe: 'events',
+            reportProgress: true
+        }).subscribe({
+            next: (event) => {
+                if (event.type === HttpEventType.DownloadProgress) {
+                    if (event.total) {
+                        this.displayProgress = Math.round(
+                            (event.loaded / event.total) * 100
+                        );
+                    } else {
+                        // total may be missing, so keep a soft progress state
+                        this.displayProgress = Math.min(this.displayProgress + 8, 95);
+                    }
+                }
+
+                if (event.type === HttpEventType.Response) {
+                    const blob = event.body;
+                    if (!blob) {
+                        this.onDisplayError();
+                        return;
+                    }
+
+                    this.objectUrl = URL.createObjectURL(blob);
+                    this.toDisplay = this.objectUrl;
+
+                    // keep loader visible until the actual <img> finishes painting
+                    this.displayProgress = 100;
+                }
+            },
+            error: () => {
+                this.onDisplayError();
+            }
+        });
     }
 
     onDisplayLoad(): void {
         this.isLoading = false;
+        this.displayProgress = 100;
     }
 
     onDisplayError(): void {
         this.isLoading = false;
+        this.displayProgress = 0;
+    }
+
+    onAssetLoad(): void {
+        if (this.loadedImages < this.files.length) {
+            this.loadedImages++;
+        }
     }
 
     filterPackage(searchInput: string): void {
@@ -151,11 +218,15 @@ export class Desktop implements OnInit, AfterViewInit {
     }
 
     close(): void {
+        this.cleanupDisplayRequest();
+        this.revokeObjectUrl();
+
         this.signal = [];
         this.toDisplay = '';
         this.booklet = [];
         this.pages = [];
         this.isLoading = false;
+        this.displayProgress = 0;
     }
 
     back(): void {
@@ -166,5 +237,19 @@ export class Desktop implements OnInit, AfterViewInit {
         this.history.pop();
         const prev = this.history[this.history.length - 1];
         this.openFolder(prev, false);
+    }
+
+    private cleanupDisplayRequest(): void {
+        if (this.displayRequestSub) {
+            this.displayRequestSub.unsubscribe();
+            this.displayRequestSub = undefined;
+        }
+    }
+
+    private revokeObjectUrl(): void {
+        if (this.objectUrl) {
+            URL.revokeObjectURL(this.objectUrl);
+            this.objectUrl = undefined;
+        }
     }
 }

@@ -1,9 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NoiseComponent } from 'src/assets/shared/noise';
 import { DecryptedTextComponent } from 'src/assets/shared/decrypted-text';
 import { ToolbarComponent } from 'src/assets/shared/toolbar';
+import { Loading } from 'src/assets/components/loading';
 
 import allFolder from 'src/assets/json/metadata.json';
 
@@ -12,9 +12,9 @@ import allFolder from 'src/assets/json/metadata.json';
     standalone: true,
     imports: [
         CommonModule,
-        NoiseComponent,
         DecryptedTextComponent,
-        ToolbarComponent
+        ToolbarComponent,
+        Loading
     ],
     templateUrl: './mobile.html',
     styleUrl: './mobile.scss',
@@ -31,6 +31,8 @@ export class Mobile implements OnInit {
     isDialogOpen = false;
     selectedFile: any = null;
 
+    loadedImages = 0;
+
     ngOnInit(): void {
         this.openFolder(allFolder, true);
     }
@@ -42,11 +44,21 @@ export class Mobile implements OnInit {
 
         this.folders = [];
         this.files = [];
+        this.loadedImages = 0;
 
         for (const item of folder.children) {
-            if (item.fileType === 'folder') {
+            if (
+                item.fileType === 'folder' &&
+                item.name?.toLowerCase() !== 'booklet'
+            ) {
                 this.folders.push(item);
-            } else if (item.fileType === 'png' || item.fileType === 'svg' || item.fileType === 'jpg' || item.fileType === 'jpeg' || item.fileType === 'webp') {
+            } else if (
+                item.fileType === 'png' ||
+                item.fileType === 'svg' ||
+                item.fileType === 'jpg' ||
+                item.fileType === 'jpeg' ||
+                item.fileType === 'webp'
+            ) {
                 this.files.push(item);
             }
         }
@@ -70,6 +82,7 @@ export class Mobile implements OnInit {
     closeDialog(): void {
         this.isDialogOpen = false;
         document.body.style.overflow = '';
+
         setTimeout(() => {
             this.selectedFile = null;
         }, 250);
@@ -77,6 +90,12 @@ export class Mobile implements OnInit {
 
     getFileImage(file: any): string {
         return `assets/images/${file.folder}/${file.id}.${file.fileType}`;
+    }
+
+    onAssetLoad(): void {
+        if (this.loadedImages < this.files.length) {
+            this.loadedImages++;
+        }
     }
 
     back(): void {
