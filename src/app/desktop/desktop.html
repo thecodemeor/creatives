@@ -1,12 +1,7 @@
 <div class="work-container">
 
     @if (searchInput.trim() !== '') {
-        <div class="toolbar">
-            <div class="container-button" (click)="searchInput = ''">
-                <img src="assets/images/icons/close.svg" alt="Close Icon">
-            </div>
-            <p>{{ allSearch.length }} found</p>
-        </div>
+        <div class="toolbar"><p>{{ allSearch.length }} {{ allSearch.length > 1 ? 'founds' : 'found' }}</p></div>
 
         <div class="container">
             <div class="grid">
@@ -23,6 +18,13 @@
                     </div>
                 }
             </div>
+        </div>
+        <div class="back" [class.need-btn]="searchInput.trim() !== ''" (click)="back()">
+            <span>
+                <img src="assets/images/icons/arrow-left.svg" class="first" alt="Arrow Left">
+                <img src="assets/images/icons/arrow-left.svg" class="second" alt="Arrow Left">
+            </span>
+            <p>Back</p>
         </div>
     }
     @else {
