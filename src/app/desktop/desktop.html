@@ -1,20 +1,4 @@
 <div class="work-container">
-    <div class="header-card">
-        <div class="title">
-            <app-decrypted-text
-                text="PIXÖRE"
-                [speed]="50"
-                [maxIterations]="10"
-                [sequential]="true"
-                revealDirection="start"
-                animateOn="inViewHover"
-            ></app-decrypted-text>
-        </div>
-        <div class="description">
-            <div class="line"></div>
-            <p>A personal showcase website featuring my creative masterpieces.</p>
-        </div>
-    </div>
 
     @if (searchInput.trim() !== '') {
         <div class="toolbar">
@@ -42,13 +26,7 @@
         </div>
     }
     @else {
-        <app-toolbar [breadcrumbs]="breadcrumbs">
-            @if (history.length > 1) {
-                <div class="button" (click)="back()">
-                    <img src="assets/images/icons/menu-left.svg" alt="">
-                </div>
-            }
-        </app-toolbar>
+        <app-toolbar [breadcrumbs]="breadcrumbs"></app-toolbar>
 
         <div class="container">
             @if (folders.length) {
@@ -64,14 +42,10 @@
                     </div>
                 }
             }
-
             @if (files.length) {
-                @if (loadedImages < files.length) {
-                    <div class="loading">
-                        <app-loading></app-loading>
-                    </div>
-                }
-
+                <div class="loading" [style.opacity]="loadedImages < files.length ? '1' : '0'">
+                    <app-loading></app-loading>
+                </div>
                 <div class="grid" [class.grid-hidden]="loadedImages < files.length">
                     @for (file of files; track file.id) {
                         <div class="file" (click)="openFile(file)">
@@ -84,30 +58,26 @@
                                     alt="image"
                                 >
                             </div>
-                            <p>
-                                <app-decrypted-text
-                                    [text]="file.name"
-                                    [speed]="50"
-                                    [maxIterations]="10"
-                                    [sequential]="true"
-                                    revealDirection="start"
-                                    animateOn="hover"
-                                ></app-decrypted-text>
-                            </p>
+                            <p>{{ file.name }}</p>
                         </div>
                     }
                 </div>
             }
-
             @if (!folders.length && !files.length) {
                 <div class="nodata">
-                    <div class="hazard-outer">
-                        <div class="hazard-inner">
-                            <p>Coming Soon!</p>
-                        </div>
+                    <div class="line-outer">
+                        <label>Coming Soon!</label>
+                        <div class="shaded"></div>
                     </div>
                 </div>
             }
+        </div>
+        <div class="back" [class.need-btn]="history.length > 1" (click)="back()">
+            <span>
+                <img src="assets/images/icons/arrow-left.svg" class="first" alt="Arrow Left">
+                <img src="assets/images/icons/arrow-left.svg" class="second" alt="Arrow Left">
+            </span>
+            <p>Back</p>
         </div>
     }
 </div>
@@ -115,64 +85,79 @@
 <div class="divider"></div>
 
 <div class="display-container">
-    @if (isLoading) {
-        <div class="display-loader">
-            <div class="progress-bar">
-                <div class="indicator" [style.width]="displayProgress + '%'"></div>
-            </div>
-            <p>{{ displayProgress }}%</p>
+    <div class="foot-note">
+        <p class="author">@thecodemeor</p>
+        <p class="version">V_{{ version }} | © 2026</p>
+    </div>
+
+    @if (openItems) {
+        <div class="container">
+            @if (toDisplay !== '') {
+                <div class="display-wrap">
+                    <div class="name">{{ signal.name }}</div>
+                    <img [src]="toDisplay" alt="Display">
+                </div>
+            }
+
+            @if (booklet.length !== 0) {
+                <app-book
+                    [images]="booklet"
+                    [pages]="pages"
+                    [width]="420"
+                    [height]="300"
+                    [cycleSec]="25"
+                    [scale]="1.2">
+                </app-book>
+            }
+
+            @if (toDisplay !== '') {
+                <div class="folder-location">
+                    <div class="name-wrap">
+                        <div class="folder-name">
+                            {{ getFolderName(signal.folder) }}
+                        </div>
+                    </div>
+                    <div class="nothing-layer">
+
+                    </div>
+                </div>
+
+                <div class="file-tools">
+                    <div class="name-wrap">
+                        @for (item of signal.tools; track item) {
+                            <div class="folder-name"><p>{{ item }}</p></div>
+                        }
+                    </div>
+                    <div class="line"></div>
+                </div>
+            }
         </div>
     }
-
-    @if (toDisplay !== '') {
-        <div class="display-wrap" [class.is-loading]="isLoading">
-            <div class="name">{{ signal.name }}</div>
-            <img
-                [src]="toDisplay"
-                alt="Display"
-                (load)="onDisplayLoad()"
-                (error)="onDisplayError()"
-            >
-        </div>
-    }
-
-    @if (booklet.length !== 0) {
-        <app-book
-            [images]="booklet"
-            [pages]="pages"
-            [width]="420"
-            [height]="300"
-            [cycleSec]="25"
-            [scale]="1.2">
-        </app-book>
-    }
-
-    @if (booklet.length === 0 && toDisplay === '') {
+    @else {
         <div class="display-idle">
-            <app-logo></app-logo>
             <div class="search-wrap">
-                <div class="search-label">Search the image you are looking for.</div>
+                <p class="description">A personal showcase website featuring my creative<br>masterpieces.</p>
                 <div class="search-input">
                     <img src="assets/images/icons/search.svg" alt="">
                     <input
                         type="text"
                         [(ngModel)]="searchInput"
                         (ngModelChange)="filterPackage($event)"
-                        placeholder="Search here..."
+                        placeholder="Search the image you are looking for..."
                     >
                 </div>
             </div>
         </div>
     }
 
-    @if (booklet.length !== 0 && isLoading || toDisplay !== '' && isLoading) {
-        <div class="close" (click)="close()">
-            <img src="assets/images/icons/close.svg" alt="Close Icon">
-        </div>
-    }
+    <div class="logo-dynamic" [class.liftup]="openItems">
+        <app-logo></app-logo>
+        <label>PIXÖRE</label>
+    </div>
 
-    <div class="version">
-        <p>V_{{ version }} | © 2026</p>
+    
+    <div class="close" [class.need-btn]="openItems" (click)="close()">
+        <img src="assets/images/icons/close.svg" alt="Close Icon">
     </div>
 </div>
 

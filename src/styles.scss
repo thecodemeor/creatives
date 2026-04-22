@@ -1,13 +1,21 @@
 @use "mozek-angular/src/styles" as moz;
 @use 'assets/scss/colors' as *;
+@use 'assets/scss/fonts' as *;
 
 body, html {
     font-family: "Google Sans Flex", sans-serif;
-    background: $swizzle-100;
+    background: $swizzle-50;
 
     img {
         user-select: none;
         pointer-events: none;
         -webkit-user-drag: none;
     }
+
+    p {
+        font-size: 0.8rem !important;
+        font-weight: 300 !important;
+    }
 }
+
+.pole { margin: 0 0.6rem;}

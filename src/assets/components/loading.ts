@@ -1,11 +1,4 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { NoiseComponent } from 'src/assets/shared/noise';
-import { DecryptedTextComponent } from 'src/assets/shared/decrypted-text';
-import { ToolbarComponent } from 'src/assets/shared/toolbar';
-
-import allFolder from 'src/assets/json/metadata.json';
 
 @Component({
     selector: 'app-loading',

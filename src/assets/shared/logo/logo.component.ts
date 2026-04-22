@@ -13,7 +13,7 @@ export class LogoComponent {
 
     ngAfterViewInit() {
         animate( '.mini-o', {
-            y: '3rem',
+            y: '5rem',
             ease: 'inOut',
             duration: 2000,
             loop: true,

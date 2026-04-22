@@ -1,14 +1,5 @@
 <div class="header-card">
-    <div class="title">
-        <app-decrypted-text
-            text="PIXÖRE"
-            [speed]="50"
-            [maxIterations]="10"
-            [sequential]="true"
-            revealDirection="start"
-            animateOn="inViewHover"
-        ></app-decrypted-text>
-    </div>
+    <div class="title">PIXÖRE</div>
     <div class="description">
         <div class="line"></div>
         <p>A personal showcase website featuring my creative masterpieces.</p>
@@ -83,16 +74,7 @@
                                 (error)="onAssetLoad()"
                             >
                         </div>
-                        <p>
-                            <app-decrypted-text
-                                [text]="file.name"
-                                [speed]="50"
-                                [maxIterations]="10"
-                                [sequential]="true"
-                                revealDirection="start"
-                                animateOn="hover"
-                            ></app-decrypted-text>
-                        </p>
+                        <p>{{ file.name}}</p>
                     </div>
                 }
             </div>

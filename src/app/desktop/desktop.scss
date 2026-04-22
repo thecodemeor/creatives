@@ -2,12 +2,12 @@
 @use 'assets/scss/colors' as *;
 
 $size-padding-outer: 0.8rem;
-$size-line: 0.1rem;
+$size-line: 1px;
 $size-radius: 1.3rem;
 $corner-pill: 999px;
 
 :host {
-    position: relative;
+    position: fixed;
     display: flex;
     width: 100vw; height: 100dvh;
     align-items: center;
@@ -31,57 +31,23 @@ $corner-pill: 999px;
 }
 
 .work-container {
-    flex: 3 1 0;
+    position: relative;
     display: flex;
-    width: 100%; height: 100%;
-    padding: $size-padding-outer 0 0 $size-padding-outer;
+    width: 30%; height: 100%;
+    padding: 0 1.5rem 0 $size-padding-outer;
     flex-direction: column;
 
-    .header-card {
-        display: flex;
-        width: calc(100% - 0.6rem); height: 35vh;
-        margin-right: 0.6rem;
-        padding: 2.5rem 1.5rem 1rem;
-        border-radius: $size-radius;
-        background-color: $matcha-400;
-        flex-direction: column;
-        justify-content: space-between;
-        z-index: 20;
-
-        .title {
-            font-family: "Saira Stencil", sans-serif;
-            font-size: 3.5rem;
-            font-weight: 600;
-        }
-
-        .description {
-            display: flex;
-            width: 100%;
-            align-items: center;
-            gap: 0.5rem;
-
-            .line {
-                width: 100%; height: 1px;
-                background-color: black;
-            }
-
-            p {
-                flex-direction: 1 1 0;
-                width: 100%;
-                font-size: 0.6rem;
-                line-height: 1.2;
-                text-align: end;
-            }
-        }
-    }
-
-    .toolbar {
+    app-toolbar, .toolbar {
+        position: absolute;
+        top: $size-padding-outer; left: 100%;
         display: flex;
         width: 100%; height: fit-content;
         padding: 0.2rem;
-        border-bottom: solid 1px color-mix(in srgb, #758262 50%, transparent);
+        transform: rotate(90deg);
+        transform-origin: 0 0;
         align-items: center;
         overflow-x: hidden;
+        z-index: 10;
 
         .container-button {
             height: 0.8rem;
@@ -98,38 +64,31 @@ $corner-pill: 999px;
     }
 
     .container {
-        flex: 1 1 0;
         position: relative;
-        display: flex;
         width: 100%; height: 100%;
-        padding-top: 0.3rem;
-        flex-direction: column;
+        padding-top: 3rem;
         overflow-y: auto;
-        &::-webkit-scrollbar { width: 5px;}
-        &::-webkit-scrollbar-thumb { background-color: $matcha-400;}
+        &::-webkit-scrollbar { display: none;}
 
         .folder {
             position: relative;
             display: flex;
             width: 100%; height: 3rem;
             padding: 0.5rem;
-            border-radius: 0.6rem 0 0 0.6rem;
+            border-radius: 0.6rem;
             align-items: center;
             gap: 0.2rem;
             transition: all 0.5s ease;
-            z-index: 15;
             cursor: pointer;
 
             &::after {
                 content: '';
                 position: absolute;
                 top: 0; right: 0; bottom: 0;
-                width: calc(100% - 1rem);
+                width: 100%;
                 border-bottom: dashed 1px color-mix(in srgb, $matcha-500 30%, transparent);
             }
-            &:nth-last-child(1) {
-                margin-bottom: calc($size-padding-outer * 2);
-            }
+            &:nth-last-child(1) { margin-bottom: calc($size-padding-outer * 2);}
 
             p {
                 font-size: 0.8rem;
@@ -143,7 +102,7 @@ $corner-pill: 999px;
             display: grid;
             width: 100%; height: fit-content;
             padding: 0 0.6rem 0.6rem 0;
-            grid-template-columns: repeat(5, minmax(5rem, 1fr));
+            grid-template-columns: repeat(3, minmax(5rem, 1fr));
             grid-auto-rows: auto;
             gap: 1rem;
             overflow: visible;
@@ -202,71 +161,194 @@ $corner-pill: 999px;
             display: flex;
             width: 100%; height: 100%;
             background-color: var(--primary);
-            flex-direction: column;
+            justify-content: start;
             align-items: center;
-            justify-content: center;
             gap: 1rem;
 
-            .hazard-outer {
-                width: fit-content; height: fit-content;
-                padding: 0.5rem;
-                border: solid 1px $matcha-400;
-                border-radius: 1.5rem;
-                background-image: repeating-linear-gradient(
-                    45deg,
-                    $matcha-400 0px,
-                    $matcha-400 1px,
-                    $swizzle-100 1px,
-                    $swizzle-100 5px
-                );
-
-                .hazard-inner {
-                    width: fit-content; height: fit-content;
-                    padding: 1rem 2rem;
-                    border: solid 1px $matcha-400;
-                    border-radius: 1rem;
-                    background: $swizzle-100;
-
-                    p {
-                        font-size: 0.8rem;
-                        font-weight: 600;
-                        color: $matcha-400;
-                    }
+            .line-outer {
+                display: flex;
+                width: 80%; height: fit-content;
+                flex-direction: column;
+                align-items: end;
+                gap: 0.5rem;
+                label {
+                    font-family: "Gemola", serif;
+                    font-size: 2rem;
+                    font-weight: 600;
+                    color: $matcha-400;
+                }
+                .shaded {
+                    width: 100%; height: 0.5rem;
+                    background: repeating-linear-gradient(
+                        -45deg,
+                        $matcha-400 0px,
+                        $matcha-400 1px,
+                        transparent 1px,
+                        transparent 5px
+                    );
                 }
             }
         }
         
         .loading {
+            position: absolute;
+            top: 0; bottom: 0; left: 0; right: 0;
             display: flex;
             width: 100%; height: 100%;
             justify-content: center;
             align-items: center;
+            transition: all 0.3s ease;
+        }
+    }
+
+    .back {
+        position: absolute;
+        top: $size-padding-outer; left: $size-padding-outer;
+        display: flex;
+        height: 1.6rem;
+        padding: 0 1.5rem;
+        border: solid 1px $matcha-400;
+        border-radius: $corner-pill;
+        background-color: $swizzle-50;
+        align-items: center;
+        transform: translateX(-8rem);
+        transition: all 0.3s ease-out;
+        gap: 0.5rem;
+        cursor: pointer;
+        &.need-btn { transform: translateX(0);}
+
+        span {
+            display: flex;
+            width: fit-content; height: 100%;
+            aspect-ratio: 1 / 1;
+            gap: 0.2rem;
+            overflow: hidden;
+            img {
+                width: auto; height: 100%;
+                transition: all 0.5s ease;
+            }
+        }
+        &:hover {
+            border-color: $matcha-500;
+            background-color: $matcha-400;
+            span {
+                filter: invert(1);
+                img { transform: translateX(calc(-100% - 0.2rem));}
+            }
+            p { color: white;}
         }
     }
 }
 
 .display-container {
-    flex: 6 1 0;
     position: relative;
     display: flex;
-    width: 100%; height: 100%;
+    width: 70%; height: 100%;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     overflow-y: auto;
     &::-webkit-scrollbar { width: 5px;}
     &::-webkit-scrollbar-thumb { background-color: $matcha-400;}
 
-    .close {
-        top: 3rem; right: 3rem;
-        animation: swipe-in 0.3s forwards ease-out;
+    .foot-note {
+        position: absolute;
+        bottom: $size-padding-outer; left: 0; right: 0;
+        display: flex;
+        width: 100%; height: fit-content;
+        padding: 0 $size-padding-outer;
+        justify-content: space-between;
 
-        @keyframes swipe-in {
-            from { transform: translateX(4rem);}
-            to { transform: translateX(0);}
+        p {
+            color: $matcha-400;
+            transition: all 0.3s;
+            &.author:hover {
+                cursor: pointer;
+                &:hover { color: $matcha-500;}
+            }
+            &.version { pointer-events: none;}
+        }
+    }
+
+    .container {
+        display: flex;
+        width: 100%;
+        padding: $size-padding-outer;
+        justify-content: center;
+        opacity: 0;
+        animation: enter-in 0.5s forwards ease;
+        animation-delay: 1s;
+
+        @keyframes enter-in {
+            to { opacity: 1;}
+        }
+
+        .folder-location {
+            position: absolute;
+            top: 50%; left: $size-padding-outer;
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            .name-wrap {
+                height: fit-content;
+                padding: 0 0 5px;
+                overflow: hidden;
+                .folder-name {
+                    font-family: "Gemola", serif;
+                    font-size: 3rem;
+                    line-height: 0.8;
+                    text-transform: capitalize;
+                    transform: translateY(-100%);
+                    animation: fall-down 1s forwards ease;
+
+                    @keyframes fall-down {
+                        to { transform: translateY(0);}
+                    }
+                }
+            }
+            .nothing-layer {
+                width: 50%; height: 20dvh;
+                background-image: radial-gradient(circle, $matcha-400 0.1rem, transparent 0.1rem);
+                background-size: 20px 20px;
+            }
+        }
+
+        .file-tools {
+            position: absolute;
+            top: 90%; right: 3rem;
+            display: flex;
+            width: fit-content;
+            align-items: center;
+            gap: 1rem;
+            transform: rotate(90deg);
+            transform-origin: 100% 0;
+
+            .name-wrap {
+                height: fit-content;
+                padding: 0 0 5px;
+                overflow: hidden;
+                .folder-name {
+                    text-transform: capitalize;
+                    color: $matcha-400;
+                    transform: translateX(100%);
+                    animation: fall-right 1s forwards ease;
+
+                    @keyframes fall-right {
+                        to { transform: translateX(0);}
+                    }
+                }
+            }
+            .line {
+                width: 20dvh; height: 1px;
+                background: black;animation: enter-in 0.5s forwards ease;
+            }
         }
     }
 
     .display-wrap {
+        position: relative;
         display: flex;
         width: fit-content; height: fit-content;
         flex-direction: column;
@@ -277,8 +359,8 @@ $corner-pill: 999px;
         z-index: 15;
 
         .name {
-            font-family: "Bodoni Moda", serif;
-            font-size: 5rem;
+            font-family: "Against", serif;
+            font-size: 4rem;
             text-align: center;
         }
 
@@ -290,11 +372,11 @@ $corner-pill: 999px;
 
     .display-idle {
         display: flex;
-        width: fit-content; height: fit-content;
+        width: calc(100% - (2 * $size-padding-outer)); height: fit-content;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transform: translateY(-2rem);
+        transform: translateY(10dvh);
         gap: 3rem;
 
         .icon-logo {
@@ -309,21 +391,18 @@ $corner-pill: 999px;
             align-items: center;
             gap: 2.5rem;
 
-            .search-label {
-                font-size: 0.9rem;
-            }
+            .description { text-align: center;}
 
             .search-input {
                 display: flex;
                 width: fit-content; height: fit-content;
                 padding: 5px;
-                border: solid 0.1rem $matcha-400;
+                border: solid 1px $matcha-400;
                 border-radius: $corner-pill;
                 gap: 0.6rem;
                 z-index: 15;
 
                 img { width: auto; height: 1.6rem;}
-
                 input {
                     width: 40vw; height: 1.6rem;
                     border: none;
@@ -339,35 +418,52 @@ $corner-pill: 999px;
         }
     }
 
-    .display-loader {
+    .logo-dynamic {
+        position: absolute;
+        top: 50dvh;
         display: flex;
-        width: 80%; height: fit-content;
-        flex-direction: column;
-        gap: 0.3rem;
-        .progress-bar, p {
-            width: 100%; height: fit-content;
-            text-align: right;
-            font-family: "Saira Stencil", sans-serif;
-            font-weight: 600;
+        height: 13rem;
+        transform: translateY(-100%);
+        transition: all 0.7s cubic-bezier(0.2, 0.5, 0.1, 1);
 
-            .indicator {
-                height: 5px;
-                background-color: $matcha-400;
+        label {
+            display: flex;
+            width: fit-content; height: 100%;
+            max-width: 0;
+            padding: 1.5px 0 0;
+            font-size: 1.5rem;
+            font-weight: 800;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        &.liftup {
+            top: $size-padding-outer;
+            height: 2.5rem;
+            transform: translateY(0);
+
+            label {
+                animation: drawright 1s forwards ease;
+                animation-delay: 0.7s;
+
+                @keyframes drawright {
+                    to {
+                        max-width: 5.8rem;
+                        padding-left: 0.3rem;
+                    }
+                }
             }
         }
     }
 
-    .version {
-        position: absolute;
-        bottom: 10dvh; left: 0; right: 0;
-        display: flex;
-        width: 100%; height: fit-content;
-        justify-content: center;
+    .close {
+        top: $size-padding-outer; right: 3rem;
+        animation: swipe-in 0.3s forwards ease-out;
+        transform: translateX(6rem);
+        transition: all 0.3s ease-out;
+        z-index: 20;
 
-        p {
-            font-size: 0.5rem;
-            color: $matcha-400;
-        }
+        &.need-btn { transform: translateX(0);}
     }
 }
 

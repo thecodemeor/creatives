@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs';
 
 import { LogoComponent } from 'src/assets/shared/logo/logo.component';
 import { NoiseComponent } from 'src/assets/shared/noise';
-import { DecryptedTextComponent } from 'src/assets/shared/decrypted-text';
 import { ToolbarComponent } from 'src/assets/shared/toolbar';
 import { BookComponent } from 'src/assets/shared/book';
 import { Loading } from 'src/assets/components/loading';
@@ -26,7 +25,6 @@ import allFolder from 'src/assets/json/metadata.json';
         CommonModule,
         FormsModule,
         NoiseComponent,
-        DecryptedTextComponent,
         ToolbarComponent,
         BookComponent,
         LogoComponent,
@@ -35,9 +33,10 @@ import allFolder from 'src/assets/json/metadata.json';
     templateUrl: './desktop.html',
     styleUrl: './desktop.scss',
 })
-export class Desktop implements OnInit, AfterViewInit, OnDestroy {
+export class Desktop implements OnInit {
     version: string = packageJson.version;
 
+    openItems: boolean = false
     folders: any[] = [];
     files: any[] = [];
     history: any[] = [];
@@ -64,13 +63,6 @@ export class Desktop implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit(): void {
         this.openFolder(allFolder, true);
         this.allImage = this.getPackage(this.allPackage, 'folder');
-    }
-
-    ngAfterViewInit(): void {}
-
-    ngOnDestroy(): void {
-        this.cleanupDisplayRequest();
-        this.revokeObjectUrl();
     }
 
     openFolder(folder: any, add: boolean): void {
@@ -101,15 +93,15 @@ export class Desktop implements OnInit, AfterViewInit, OnDestroy {
     }
 
     openFile(file: any): void {
-        this.cleanupDisplayRequest();
-        this.revokeObjectUrl();
-
+        this.openItems = true
         this.toDisplay = '';
         this.booklet = [];
         this.pages = [];
         this.signal = file;
         this.isLoading = true;
         this.displayProgress = 0;
+
+        console.log(this.signal, 'mcb')
 
         if (file.folder === 'work/booklet') {
             const name = file.name.replace(/\s+/g, '').toLowerCase();
@@ -152,7 +144,6 @@ export class Desktop implements OnInit, AfterViewInit, OnDestroy {
                 if (event.type === HttpEventType.Response) {
                     const blob = event.body;
                     if (!blob) {
-                        this.onDisplayError();
                         return;
                     }
 
@@ -162,21 +153,8 @@ export class Desktop implements OnInit, AfterViewInit, OnDestroy {
                     // keep loader visible until the actual <img> finishes painting
                     this.displayProgress = 100;
                 }
-            },
-            error: () => {
-                this.onDisplayError();
             }
         });
-    }
-
-    onDisplayLoad(): void {
-        this.isLoading = false;
-        this.displayProgress = 100;
-    }
-
-    onDisplayError(): void {
-        this.isLoading = false;
-        this.displayProgress = 0;
     }
 
     onAssetLoad(): void {
@@ -217,16 +195,18 @@ export class Desktop implements OnInit, AfterViewInit, OnDestroy {
         return result;
     }
 
-    close(): void {
-        this.cleanupDisplayRequest();
-        this.revokeObjectUrl();
+    getFolderName(path: string) {
+        return path.split('/')[1]
+    }
 
+    close(): void {
         this.signal = [];
         this.toDisplay = '';
         this.booklet = [];
         this.pages = [];
         this.isLoading = false;
         this.displayProgress = 0;
+        this.openItems = false
     }
 
     back(): void {
@@ -237,19 +217,5 @@ export class Desktop implements OnInit, AfterViewInit, OnDestroy {
         this.history.pop();
         const prev = this.history[this.history.length - 1];
         this.openFolder(prev, false);
-    }
-
-    private cleanupDisplayRequest(): void {
-        if (this.displayRequestSub) {
-            this.displayRequestSub.unsubscribe();
-            this.displayRequestSub = undefined;
-        }
-    }
-
-    private revokeObjectUrl(): void {
-        if (this.objectUrl) {
-            URL.revokeObjectURL(this.objectUrl);
-            this.objectUrl = undefined;
-        }
     }
 }
