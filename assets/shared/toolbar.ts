@@ -15,12 +15,6 @@ import { Component, Input, OnInit, ElementRef, ViewChild } from '@angular/core';
     styles: `
         :host {
             --gapline: 1px;
-            display: flex;
-            width: 100%; height: fit-content;
-            padding: 0.2rem;
-            border-bottom: solid 1px color-mix(in srgb, #758262 50%, transparent);
-            align-items: center;
-            overflow-x: hidden;
         }
         .container-button {
             height: 0.8rem;
@@ -57,7 +51,7 @@ export class ToolbarComponent implements OnInit {
         let newbreadcrumbs = capitalized.join('/');
 
         this.scrollToRight()
-        return newbreadcrumbs.replace( /\//g, '&nbsp;<span class="pole">|</span>&nbsp;')
+        return newbreadcrumbs.replace( /\//g, '<span class="pole">|</span>')
     }
 
     scrollToRight(): void {
