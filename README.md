@@ -4,7 +4,7 @@
     This is my creative playground—a graphic design portfolio where every piece tells a story. 
     From bold visuals to subtle details, each masterpiece reflects my journey, ideas, and passion for design. 
     Built with intention and a love for aesthetics, this space is where creativity comes alive.
-    <br><br>
+    <br>
     <p style="display: inline-block;" align="center">
         <kbd>
             <kbd>Front-end</kbd>
@@ -20,10 +20,16 @@
             <img width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-original.svg" />
         </kbd>
     </p>
+    <br>
 </p>
 
 <h2 align="center">Website 🖥️</h2>
-<p align="center">https://thecodemeor.github.io/creatives/</p><br><br>
+<p align="center">https://thecodemeor.github.io/creatives/</p>
+<br>
+<div align= "center">
+  <img src="https://media.giphy.com/media/VgCDAzcKvsR6OM0uWg/giphy.gif" width="50"/> <b><i>Enjoy bro!</i></b> 
+</div>
+<br><br>
 
 ```bash
 # The Designer
