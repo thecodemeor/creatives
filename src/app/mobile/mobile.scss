@@ -7,6 +7,8 @@ $size-radius: 1.3rem;
 $corner-pill: 999px;
 
 :host {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
     display: flex;
     width: 100vw; height: 100dvh;
     flex-direction: column;
@@ -14,31 +16,29 @@ $corner-pill: 999px;
     .close {
         position: absolute;
         width: fit-content; height: fit-content;
-        border: solid 0.1rem black;
+        border: solid 0.1rem $matcha-400;
         border-radius: $corner-pill;
+        background-color: $matcha-400;
         overflow: hidden;
         cursor: pointer;
 
-        img { width: auto; height: 2.5rem;}
-
-        &:hover {
-            background-color: $matcha-400;
-
-            img { filter: invert(1)}
+        img {
+            width: auto; height: 2.5rem;
+            filter: invert(1)
         }
     }
 }
 
 .header-container {
     width: 100%; height: fit-content;
-    padding: 1rem;
+    padding: 1rem 1rem 0;
     border-bottom: solid 1px $matcha-400;
 
     .header-card {
         display: flex;
-        width: 100%; height: 30vh;
-        padding: 1rem 0.6rem 0;
-        border-left: solid 0.1rem $matcha-400;
+        width: 100%; height: 33vh;
+        padding: 1rem 0.6rem 1rem;
+        border-left: solid 1px $matcha-400;
         flex-direction: column;
         z-index: 20;
     
@@ -60,7 +60,6 @@ $corner-pill: 999px;
             gap: 0.5rem;
     
             p {
-                flex-direction: 1 1 0;
                 width: 100%;
                 font-size: 0.6rem;
                 line-height: 1.2;
@@ -98,7 +97,6 @@ $corner-pill: 999px;
     }
 
     .container {
-        flex: 1 1 0;
         position: relative;
         display: flex;
         width: 100%; height: 100%;
@@ -135,8 +133,6 @@ $corner-pill: 999px;
                 font-size: 0.8rem;
                 &.item-length { font-size: 0.5rem;}
             }
-    
-            &:hover { background-color: color-mix(in srgb, $matcha-400 40%, transparent);}
         }
     
         .grid {
@@ -180,10 +176,6 @@ $corner-pill: 999px;
                     overflow: hidden;
                 }
     
-                &:hover {
-                    img { background-color: color-mix(in srgb, $matcha-400 30%, transparent);}
-                }
-    
                 &:active {
                     .image-display {
                         img { background-color: $matcha-400;}
@@ -201,18 +193,13 @@ $corner-pill: 999px;
     
         .loading {
             position: absolute;
-            inset: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             display: flex;
-            flex-direction: column;
+            width: 100%; height: 100%;
             justify-content: center;
             align-items: center;
             gap: 0.8rem;
             z-index: 20;
-    
-            p {
-                margin: 0;
-                font-size: 0.7rem;
-            }
         }
     
         .nodata {
@@ -259,9 +246,9 @@ $corner-pill: 999px;
         border: solid 1px $matcha-400;
         border-radius: $corner-pill;
         background-color: $matcha-400;
+        justify-content: center;
         align-items: center;
         transform: translateX(-8rem);
-        transition: all 0.3s ease-out;
         gap: 0.5rem;
         z-index: 20;
         cursor: pointer;
@@ -270,14 +257,8 @@ $corner-pill: 999px;
         span {
             display: flex;
             width: fit-content; height: 100%;
-            aspect-ratio: 1 / 1;
-            gap: 0.2rem;
-            overflow: hidden;
             filter: invert(1);
-            img {
-                width: auto; height: 100%;
-                transition: all 0.5s ease;
-            }
+            img { width: auto; height: 100%;}
         }
 
         p { color: white;}
@@ -338,7 +319,7 @@ $corner-pill: 999px;
                 align-items: center;
     
                 .dialog-title {
-                    font-family: "Bodoni Moda", serif;
+                    font-family: "Gemola", serif;
                     font-size: 3rem;
                     text-align: center;
                 }
