@@ -34,7 +34,9 @@
             @if (folders.length) {
                 @for (folder of folders; track folder.id ?? folder.name) {
                     <div class="folder" (click)="openFolder(folder, true)">
-                        <div class="image-display"></div>
+                        <div class="image-display">
+                            <img src="assets/images/icons/arrow-left.svg" [style.rotate]="'180deg'" alt="Arrow Left">
+                        </div>
                         <p>{{ folder.name | titlecase }}</p>
                         <div class="spacer"></div>
                         <p class="item-length">
@@ -88,8 +90,11 @@
 
 <div class="display-container">
     <div class="foot-note">
-        <p class="author">@thecodemeor</p>
-        <p class="version">V_{{ version }} | © 2026</p>
+        <p class="author">
+            Crafted with creativity and precision by<br><br>
+            <span (click)="openLinkWebsite()">@thecodemeor</span>
+        </p>
+        <p class="version">Version {{ version }} | ©2026</p>
     </div>
 
     @if (openItems) {
@@ -119,9 +124,7 @@
                             {{ getFolderName(signal.folder) }}
                         </div>
                     </div>
-                    <div class="nothing-layer">
-
-                    </div>
+                    <div class="nothing-layer"></div>
                 </div>
 
                 <div class="file-tools">
@@ -136,6 +139,10 @@
         </div>
     }
     @else {
+        <div class="background">
+            <div class="text">PIX<span>Ö</span>RE</div>
+            <div class="line"></div>
+        </div>
         <div class="display-idle">
             <div class="search-wrap">
                 <p class="description">A personal showcase website featuring my creative<br>masterpieces.</p>

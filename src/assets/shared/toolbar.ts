@@ -4,9 +4,6 @@ import { Component, Input, OnInit, ElementRef, ViewChild } from '@angular/core';
     selector: 'app-toolbar',
     standalone: true,
     template: `
-        <div class="container-button">
-            <ng-content></ng-content>
-        </div>
         <div class="breadcrumbs">
             <p [innerHTML]="breadcrumbsLabel()"></p>
             <span #dragEnd></span>
@@ -15,11 +12,6 @@ import { Component, Input, OnInit, ElementRef, ViewChild } from '@angular/core';
     styles: `
         :host {
             --gapline: 1px;
-        }
-        .container-button {
-            height: 0.8rem;
-            aspect-ratio: 1 / 1;
-            cursor: pointer;
         }
         .breadcrumbs {
             flex: 1 1 auto;
@@ -35,6 +27,7 @@ import { Component, Input, OnInit, ElementRef, ViewChild } from '@angular/core';
             display: inline;
             margin: 0;
             font-size: 0.5rem;
+            pointer-events: none;
         }
     `
 })

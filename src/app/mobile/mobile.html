@@ -1,135 +1,141 @@
-<div class="header-card">
-    <div class="title">PIXÖRE</div>
-    <div class="description">
-        <div class="line"></div>
-        <p>A personal showcase website featuring my creative masterpieces.</p>
+<div class="header-container">
+    <div class="header-card">
+        <app-logo></app-logo>
+        <div class="title">PIX<span>Ö</span>RE</div>
+        <div class="spacer"></div>
+        <div class="description">
+            <p>A personal showcase website featuring my creative masterpieces.</p>
+        </div>
     </div>
 </div>
 
-@if (searchInput.trim() !== '') {
-    <div class="toolbar">
-        <div class="container-button" (click)="searchInput = ''">
-            <img src="assets/images/icons/close.svg" alt="Close Icon">
-        </div>
-        <p>{{ allSearch.length }} found</p>
-    </div>
-
-    <div class="container">
-        <div class="grid">
-            @for (file of allSearch; track file.id) {
-                <div class="file" (click)="openFile(file)">
-                    <div class="image-display">
-                        <img
-                            [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType"
-                            class="afolder"
-                            alt="image"
-                        >
-                    </div>
-                    <p>{{ file.name }}</p>
-                </div>
-            }
-        </div>
-    </div>
-}
-@else {
-    <app-toolbar [breadcrumbs]="breadcrumbs">
-        @if (history.length > 1) {
-            <div class="button" (click)="back()">
-                <img src="assets/images/icons/menu-left.svg" alt="">
+<div class="work-container">
+    @if (searchInput.trim() !== '') {
+        <div class="toolbar">
+            <div class="container-button" (click)="searchInput = ''">
+                <img src="assets/images/icons/close.svg" alt="Close Icon">
             </div>
-        }
-    </app-toolbar>
-
-    <div class="container">
-        @if (folders.length) {
-            @for (folder of folders; track folder.id ?? folder.name) {
-                <div class="folder" (click)="openFolder(folder, true)">
-                    <div class="image-display"></div>
-                    <p>{{ folder.name | titlecase }}</p>
-                    <div class="spacer"></div>
-                    <p class="item-length">
-                        {{ folder.children.length }}
-                        {{ folder.children.length > 1 ? 'items' : 'item' }}
-                    </p>
-                </div>
-            }
-        }
-
-        @if (files.length) {
-            @if (loadedImages < files.length) {
-                <div class="loading">
-                    <app-loading></app-loading>
-                </div>
-            }
-
-            <div class="grid" [class.grid-hidden]="loadedImages < files.length">
-                @for (file of files; track file.id) {
+            <p>{{ allSearch.length }} found</p>
+        </div>
+    
+        <div class="container">
+            <div class="grid">
+                @for (file of allSearch; track file.id) {
                     <div class="file" (click)="openFile(file)">
                         <div class="image-display">
                             <img
                                 [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType"
-                                class="aimage"
+                                class="afolder"
                                 alt="image"
-                                (load)="onAssetLoad()"
-                                (error)="onAssetLoad()"
                             >
                         </div>
-                        <p>{{ file.name}}</p>
+                        <p>{{ file.name }}</p>
                     </div>
                 }
             </div>
-        }
-
-        @if (!folders.length && !files.length) {
-            <div class="nodata">
-                <div class="hazard-outer">
-                    <div class="hazard-inner">
-                        <p>Coming Soon!</p>
+        </div>
+    }
+    @else {
+        <app-toolbar [breadcrumbs]="breadcrumbs"></app-toolbar>
+    
+        <div class="container">
+            @if (folders.length) {
+                @for (folder of folders; track folder.id ?? folder.name) {
+                    <div class="folder" (click)="openFolder(folder, true)">
+                        <div class="image-display"></div>
+                        <p>{{ folder.name | titlecase }}</p>
+                        <div class="spacer"></div>
+                        <p class="item-length">
+                            {{ folder.children.length }}
+                            {{ folder.children.length > 1 ? 'items' : 'item' }}
+                        </p>
+                    </div>
+                }
+            }
+    
+            @if (files.length) {
+                @if (loadedImages < files.length) {
+                    <div class="loading">
+                        <app-loading></app-loading>
+                    </div>
+                }
+    
+                <div class="grid" [class.grid-hidden]="loadedImages < files.length">
+                    @for (file of files; track file.id) {
+                        <div class="file" (click)="openFile(file)">
+                            <div class="image-display">
+                                <img
+                                    [src]="'assets/images/' + file.folder + '/' + file.id + '.' + file.fileType"
+                                    class="aimage"
+                                    alt="image"
+                                    (load)="onAssetLoad()"
+                                    (error)="onAssetLoad()"
+                                >
+                            </div>
+                            <p>{{ file.name}}</p>
+                        </div>
+                    }
+                </div>
+            }
+    
+            @if (!folders.length && !files.length) {
+                <div class="nodata">
+                    <div class="line-outer">
+                        <label>Coming Soon!</label>
+                        <div class="shaded"></div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
-}
-
-@if (selectedFile && isDialogOpen) {
-    <div
-        class="linear-dialog-overlay"
-        (click)="closeDialog()"
-        [class.show]="isDialogOpen"
-    >
+            }
+        </div>
+    
+        <div class="back" [class.need-btn]="history.length > 1" (click)="back()">
+            <span>
+                <img src="assets/images/icons/arrow-left.svg" class="first" alt="Arrow Left">
+                <img src="assets/images/icons/arrow-left.svg" class="second" alt="Arrow Left">
+            </span>
+            <p>Back</p>
+        </div>
+    }
+    
+    @if (selectedFile && isDialogOpen) {
         <div
-            class="linear-dialog"
+            class="linear-dialog-overlay"
+            (click)="closeDialog()"
             [class.show]="isDialogOpen"
-            (click)="$event.stopPropagation()"
         >
-            <div class="dialog-image-wrap">
-                @if (isImageLoading) {
-                    <div class="dialog-loader">
-                        <div class="progress-bar">
-                            <div class="indicator" [style.width]="displayProgress + '%'"></div>
+            <div
+                class="linear-dialog"
+                [class.show]="isDialogOpen"
+                (click)="$event.stopPropagation()"
+            >
+                <div class="dialog-image-wrap">
+                    @if (isImageLoading) {
+                        <div class="dialog-loader">
+                            <div class="progress-bar">
+                                <div class="indicator" [style.width]="displayProgress + '%'"></div>
+                            </div>
+                            <p>{{ displayProgress }}%</p>
                         </div>
-                        <p>{{ displayProgress }}%</p>
-                    </div>
-                }
-
-                <img
-                    [src]="selectedFile.preview || getFileImage(selectedFile)"
-                    [alt]="selectedFile.name"
-                    class="dialog-image"
-                    [class.hidden]="isImageLoading"
-                    (load)="onDialogImageLoad()"
-                    (error)="onDialogImageError()"
-                >
+                    }
+    
+                    <img
+                        [src]="selectedFile.preview || getFileImage(selectedFile)"
+                        [alt]="selectedFile.name"
+                        class="dialog-image"
+                        [class.hidden]="isImageLoading"
+                        (load)="onDialogImageLoad()"
+                        (error)="onDialogImageError()"
+                    >
+                </div>
+    
+                <div class="dialog-body">
+                    <h2 class="dialog-title">{{ selectedFile.name }}</h2>
+                </div>
             </div>
-
-            <div class="dialog-body">
-                <h2 class="dialog-title">{{ selectedFile.name }}</h2>
+    
+            <div class="close" (click)="closeDialog()">
+                <img src="assets/images/icons/close.svg" alt="Close Icon">
             </div>
         </div>
-
-        <div class="close" (click)="closeDialog()">
-            <img src="assets/images/icons/close.svg" alt="Close Icon">
-        </div>
-    </div>
-}
+    }
+</div>

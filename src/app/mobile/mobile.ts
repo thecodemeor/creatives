@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
+import { LogoComponent } from 'src/assets/shared/logo/logo.component';
 import { ToolbarComponent } from 'src/assets/shared/toolbar';
 import { Loading } from 'src/assets/components/loading';
 
@@ -13,6 +14,7 @@ import allFolder from 'src/assets/json/metadata.json';
     standalone: true,
     imports: [
         CommonModule,
+        LogoComponent,
         ToolbarComponent,
         Loading
     ],

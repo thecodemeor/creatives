@@ -199,6 +199,10 @@ export class Desktop implements OnInit {
         return path.split('/')[1]
     }
 
+    openLinkWebsite() {
+        window.open('https://www.meorhakim.com', '_blank');
+    }
+
     close(): void {
         this.signal = [];
         this.toDisplay = '';
