@@ -54,13 +54,13 @@
             }
     
             @if (files.length) {
-                @if (true) {
+                @if (loadedImages < files.length) {
                     <div class="loading">
                         <app-loading></app-loading>
                     </div>
                 }
     
-                <!-- <div class="grid" [class.grid-hidden]="loadedImages < files.length">
+                <div class="grid" [class.grid-hidden]="loadedImages < files.length">
                     @for (file of files; track file.id) {
                         <div class="file" (click)="openFile(file)">
                             <div class="image-display">
@@ -75,7 +75,7 @@
                             <p>{{ file.name}}</p>
                         </div>
                     }
-                </div> -->
+                </div>
             }
     
             @if (!folders.length && !files.length) {
