@@ -43,6 +43,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
             justify-content: space-between;
             width: var(--uib-size);
             height: var(--uib-dot-size);
+            margin: auto;
             filter: url('#uib-jelly-ooze');
         }
 
