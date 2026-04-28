@@ -391,6 +391,11 @@ $corner-pill: 999px;
         img {
             width: 40vmin; height: auto;
             border-radius: 2rem;
+            pointer-events: unset;
+            transition: all 0.3s;
+            cursor: pointer;
+
+            &:hover { scale: 1.05;}
         }
     }
 
@@ -523,5 +528,68 @@ $corner-pill: 999px;
 @keyframes spin {
     to {
         transform: rotate(360deg);
+    }
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1000;
+    pointer-events: none;
+    transition: background-color 0.4s ease;
+
+    &.open {
+        background-color: rgba(0, 0, 0, 0.70);
+        pointer-events: all;
+    }
+
+    img {
+        max-width: 90vw;
+        max-height: 90dvh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 1rem;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+
+        &.poster { background-color: $swizzle-50;}
+    }
+
+    &.open img {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: fit-content;
+        height: fit-content;
+        padding: 0.3rem;
+        border: solid 0.1rem $matcha-400;
+        border-radius: 50%;
+        background-color: $matcha-400;
+        cursor: pointer;
+        overflow: hidden;
+
+        img {
+            width: auto;
+            height: 2rem;
+            opacity: 1;
+            transform: scale(1);
+            border-radius: 0;
+        }
+
+        &:hover {
+            background-color: $matcha-400;
+            img { filter: invert(1); }
+        }
     }
 }

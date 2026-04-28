@@ -1,8 +1,10 @@
 import {
     Component,
+    OnDestroy,
     OnInit,
-    AfterViewInit,
-    OnDestroy
+    computed,
+    effect,
+    signal
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -33,92 +35,120 @@ import allFolder from 'src/assets/json/metadata.json';
     templateUrl: './desktop.html',
     styleUrl: './desktop.scss',
 })
-export class Desktop implements OnInit {
-    version: string = packageJson.version;
+export class Desktop implements OnInit, OnDestroy {
+    readonly version: string = packageJson.version;
 
-    openItems: boolean = false
-    folders: any[] = [];
-    files: any[] = [];
-    history: any[] = [];
-    breadcrumbs: string = '';
-    toDisplay: string = '';
-    signal: any;
-    booklet: any[] = [];
-    pages: any[] = [];
+    readonly openItems = signal(false);
 
-    searchInput: string = '';
-    allSearch: any[] = [];
-    allImage: any[] = [];
-    allPackage: any = allFolder.children;
+    private readonly rootFolder = allFolder as any;
+    private readonly allPackage: any[] = (this.rootFolder?.children ?? []) as any[];
 
-    isLoading = false;
-    loadedImages = 0;
+    readonly history = signal<any[]>([]);
+    readonly currentFolder = computed<any | null>(() => {
+        const h = this.history();
+        return h.length ? h[h.length - 1] : null;
+    });
 
-    displayProgress = 0;
+    readonly breadcrumbs = computed(() => {
+        const h = this.history();
+        if (!h.length) return '';
+        return h.map((f) => `/${f.name}`).join('');
+    });
+
+    readonly folders = computed<any[]>(() => {
+        const folder = this.currentFolder();
+        const children: any[] = folder?.children ?? [];
+        return children.filter((item) => item?.fileType === 'folder');
+    });
+
+    readonly files = computed<any[]>(() => {
+        const folder = this.currentFolder();
+        const children: any[] = folder?.children ?? [];
+        return children.filter(
+            (item) => item?.fileType === 'png' || item?.fileType === 'svg'
+        );
+    });
+
+    readonly loadedImages = signal(0);
+
+    readonly searchInput = signal('');
+    readonly allImage = signal<any[]>([]);
+    readonly allSearch = computed<any[]>(() => {
+        const keyword = this.searchInput().toLowerCase().trim();
+        if (!keyword) return [];
+        return this.allImage().filter((file) =>
+            (file?.name ?? '').toLowerCase().trim().includes(keyword)
+        );
+    });
+
+    readonly toDisplay = signal('');
+    readonly selectedFile = signal<any | null>(null);
+    readonly booklet = signal<any[]>([]);
+    readonly pages = signal<any[]>([]);
+
+    readonly isLoading = signal(false);
+    readonly displayProgress = signal(0);
+
     private displayRequestSub?: Subscription;
     private objectUrl?: string;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        effect(() => {
+            // Reset grid loader whenever the set of visible files changes.
+            // (Also triggers on folder navigation.)
+            this.files();
+            this.loadedImages.set(0);
+        });
+    }
 
     ngOnInit(): void {
-        this.openFolder(allFolder, true);
-        this.allImage = this.getPackage(this.allPackage, 'folder');
+        this.openFolder(this.rootFolder, true);
+        this.allImage.set(this.getPackage(this.allPackage, 'folder'));
     }
 
     openFolder(folder: any, add: boolean): void {
+        if (!folder) return;
         if (add) {
-            this.history.push(folder);
-        }
-
-        this.folders = [];
-        this.files = [];
-        this.loadedImages = 0;
-
-        for (const item of folder.children) {
-            if (item.fileType === 'folder') {
-                this.folders.push(item);
-            } else if (item.fileType === 'png' || item.fileType === 'svg') {
-                this.files.push(item);
-            }
-        }
-
-        if (add) {
-            this.breadcrumbs += `/${folder.name}`;
+            this.history.update((h) => [...h, folder]);
         } else {
-            this.breadcrumbs = this.breadcrumbs.substring(
-                0,
-                this.breadcrumbs.lastIndexOf('/')
-            );
+            // back() already popped; just replace the head so computed stays consistent
+            this.history.update((h) => (h.length ? [...h.slice(0, -1), folder] : [folder]));
         }
     }
 
     openFile(file: any): void {
-        this.openItems = true
-        this.toDisplay = '';
-        this.booklet = [];
-        this.pages = [];
-        this.signal = file;
-        this.isLoading = true;
-        this.displayProgress = 0;
+        this.cleanupDisplayRequest();
 
-        console.log(this.signal, 'mcb')
+        this.openItems.set(true);
+        this.toDisplay.set('');
+        this.booklet.set([]);
+        this.pages.set([]);
+        this.selectedFile.set(file);
+        this.isLoading.set(true);
+        this.displayProgress.set(0);
 
         if (file.folder === 'work/booklet') {
             const name = file.name.replace(/\s+/g, '').toLowerCase();
             const pageMerge = file.pages / 2;
 
+            const nextPages: string[] = [];
             for (let i = 0; i < file.pages; i++) {
                 const id = i + 1;
-                this.pages.push(`assets/images/work/booklet/${name}/${id}.svg`);
+                nextPages.push(`assets/images/work/booklet/${name}/${id}.svg`);
             }
 
+            const nextBooklet: string[] = [];
             for (let i = 0; i < pageMerge; i++) {
                 const id = i + 1;
-                this.booklet.push(`assets/images/work/booklet/${name}/book/${id}.png`);
+                nextBooklet.push(
+                    `assets/images/work/booklet/${name}/book/${id}.png`
+                );
             }
 
-            this.isLoading = false;
-            this.displayProgress = 100;
+            this.pages.set(nextPages);
+            this.booklet.set(nextBooklet);
+            this.isLoading.set(false);
+            this.displayProgress.set(100);
             return;
         }
 
@@ -132,12 +162,14 @@ export class Desktop implements OnInit {
             next: (event) => {
                 if (event.type === HttpEventType.DownloadProgress) {
                     if (event.total) {
-                        this.displayProgress = Math.round(
+                        this.displayProgress.set(Math.round(
                             (event.loaded / event.total) * 100
-                        );
+                        ));
                     } else {
                         // total may be missing, so keep a soft progress state
-                        this.displayProgress = Math.min(this.displayProgress + 8, 95);
+                        this.displayProgress.set(
+                            Math.min(this.displayProgress() + 8, 95)
+                        );
                     }
                 }
 
@@ -147,36 +179,25 @@ export class Desktop implements OnInit {
                         return;
                     }
 
+                    this.cleanupObjectUrl();
                     this.objectUrl = URL.createObjectURL(blob);
-                    this.toDisplay = this.objectUrl;
+                    this.toDisplay.set(this.objectUrl);
 
                     // keep loader visible until the actual <img> finishes painting
-                    this.displayProgress = 100;
+                    this.displayProgress.set(100);
                 }
             }
         });
     }
 
     onAssetLoad(): void {
-        if (this.loadedImages < this.files.length) {
-            this.loadedImages++;
+        if (this.loadedImages() < this.files().length) {
+            this.loadedImages.update((v) => v + 1);
         }
     }
 
     filterPackage(searchInput: string): void {
-        const keyword = searchInput.toLowerCase().trim();
-        this.allSearch = [];
-
-        if (!keyword) {
-            return;
-        }
-
-        for (const file of this.allImage) {
-            const name = file.name.toLowerCase().trim();
-            if (name.includes(keyword)) {
-                this.allSearch.push(file);
-            }
-        }
+        this.searchInput.set(searchInput);
     }
 
     getPackage(packageJson: any, filter: string): any[] {
@@ -203,23 +224,50 @@ export class Desktop implements OnInit {
         window.open('https://www.meorhakim.com', '_blank');
     }
 
+    readonly lightboxOpen = signal(false);
+    openLightbox(): void {
+        this.lightboxOpen.set(true);
+    }
+
+    closeLightbox(): void {
+        this.lightboxOpen.set(false);
+    }
+
     close(): void {
-        this.signal = [];
-        this.toDisplay = '';
-        this.booklet = [];
-        this.pages = [];
-        this.isLoading = false;
-        this.displayProgress = 0;
-        this.openItems = false
+        this.cleanupDisplayRequest();
+        this.selectedFile.set(null);
+        this.toDisplay.set('');
+        this.booklet.set([]);
+        this.pages.set([]);
+        this.isLoading.set(false);
+        this.displayProgress.set(0);
+        this.openItems.set(false);
+        this.lightboxOpen.set(false);
     }
 
     back(): void {
-        if (this.history.length <= 1) {
+        if (this.history().length <= 1) {
             return;
         }
 
-        this.history.pop();
-        const prev = this.history[this.history.length - 1];
-        this.openFolder(prev, false);
+        this.history.update((h) => h.slice(0, -1));
+    }
+
+    ngOnDestroy(): void {
+        this.cleanupDisplayRequest();
+        this.cleanupObjectUrl();
+    }
+
+    private cleanupDisplayRequest(): void {
+        this.displayRequestSub?.unsubscribe();
+        this.displayRequestSub = undefined;
+        this.isLoading.set(false);
+    }
+
+    private cleanupObjectUrl(): void {
+        if (this.objectUrl) {
+            URL.revokeObjectURL(this.objectUrl);
+            this.objectUrl = undefined;
+        }
     }
 }

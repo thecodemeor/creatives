@@ -1,11 +1,11 @@
 <div class="work-container">
 
-    @if (searchInput.trim() !== '') {
-        <div class="toolbar"><p>{{ allSearch.length }} {{ allSearch.length > 1 ? 'founds' : 'found' }}</p></div>
+    @if (searchInput().trim() !== '') {
+        <div class="toolbar"><p>{{ allSearch().length }} {{ allSearch().length > 1 ? 'founds' : 'found' }}</p></div>
 
         <div class="container">
             <div class="grid">
-                @for (file of allSearch; track file.id) {
+                @for (file of allSearch(); track file.id) {
                     <div class="file" (click)="openFile(file)">
                         <div class="image-display">
                             <img
@@ -19,7 +19,7 @@
                 }
             </div>
         </div>
-        <div class="back" [class.need-btn]="searchInput.trim() !== ''" (click)="back()">
+        <div class="back" [class.need-btn]="searchInput().trim() !== ''" (click)="back()">
             <span>
                 <img src="assets/images/icons/arrow-left.svg" class="first" alt="Arrow Left">
                 <img src="assets/images/icons/arrow-left.svg" class="second" alt="Arrow Left">
@@ -28,11 +28,11 @@
         </div>
     }
     @else {
-        <app-toolbar [breadcrumbs]="breadcrumbs"></app-toolbar>
+        <app-toolbar [breadcrumbs]="breadcrumbs()"></app-toolbar>
 
         <div class="container">
-            @if (folders.length) {
-                @for (folder of folders; track folder.id ?? folder.name) {
+            @if (folders().length) {
+                @for (folder of folders(); track folder.id ?? folder.name) {
                     <div class="folder" (click)="openFolder(folder, true)">
                         <div class="image-display">
                             <img src="assets/images/icons/arrow-left.svg" [style.rotate]="'180deg'" alt="Arrow Left">
@@ -46,12 +46,12 @@
                     </div>
                 }
             }
-            @if (files.length) {
-                <div class="loading" [style.opacity]="loadedImages < files.length ? '1' : '0'">
+            @if (files().length) {
+                <div class="loading" [style.opacity]="loadedImages() < files().length ? '1' : '0'">
                     <app-loading></app-loading>
                 </div>
-                <div class="grid" [class.grid-hidden]="loadedImages < files.length">
-                    @for (file of files; track file.id) {
+                <div class="grid" [class.grid-hidden]="loadedImages() < files().length">
+                    @for (file of files(); track file.id) {
                         <div class="file" (click)="openFile(file)">
                             <div class="image-display">
                                 <img
@@ -67,7 +67,7 @@
                     }
                 </div>
             }
-            @if (!folders.length && !files.length) {
+            @if (!folders().length && !files().length) {
                 <div class="nodata">
                     <div class="line-outer">
                         <label>Coming Soon!</label>
@@ -76,7 +76,7 @@
                 </div>
             }
         </div>
-        <div class="back" [class.need-btn]="history.length > 1" (click)="back()">
+        <div class="back" [class.need-btn]="history().length > 1" (click)="back()">
             <span>
                 <img src="assets/images/icons/arrow-left.svg" class="first" alt="Arrow Left">
                 <img src="assets/images/icons/arrow-left.svg" class="second" alt="Arrow Left">
@@ -97,19 +97,19 @@
         <p class="version">Version {{ version }} | ©2026</p>
     </div>
 
-    @if (openItems) {
+    @if (openItems()) {
         <div class="container">
-            @if (toDisplay !== '') {
-                <div class="display-wrap">
-                    <div class="name">{{ signal.name }}</div>
-                    <img [src]="toDisplay" alt="Display">
+            @if (toDisplay() !== '') {
+                <div class="display-wrap" (click)="openLightbox()">
+                    <div class="name">{{ selectedFile()?.name }}</div>
+                    <img [src]="toDisplay()" alt="Display">
                 </div>
             }
 
-            @if (booklet.length !== 0) {
+            @if (booklet().length !== 0) {
                 <app-book
-                    [images]="booklet"
-                    [pages]="pages"
+                    [images]="booklet()"
+                    [pages]="pages()"
                     [width]="420"
                     [height]="300"
                     [cycleSec]="25"
@@ -117,11 +117,11 @@
                 </app-book>
             }
 
-            @if (toDisplay !== '') {
+            @if (toDisplay() !== '') {
                 <div class="folder-location">
                     <div class="name-wrap">
                         <div class="folder-name">
-                            {{ getFolderName(signal.folder) }}
+                            {{ getFolderName(selectedFile()?.folder) }}
                         </div>
                     </div>
                     <div class="nothing-layer"></div>
@@ -129,7 +129,7 @@
 
                 <div class="file-tools">
                     <div class="name-wrap">
-                        @for (item of signal.tools; track item) {
+                        @for (item of (selectedFile()?.tools ?? []); track item) {
                             <div class="folder-name"><p>{{ item }}</p></div>
                         }
                     </div>
@@ -150,7 +150,7 @@
                     <img src="assets/images/icons/search.svg" alt="">
                     <input
                         type="text"
-                        [(ngModel)]="searchInput"
+                        [ngModel]="searchInput()"
                         (ngModelChange)="filterPackage($event)"
                         placeholder="Search the image you are looking for..."
                     >
@@ -159,15 +159,29 @@
         </div>
     }
 
-    <div class="logo-dynamic" [class.liftup]="openItems">
+    <div class="logo-dynamic" [class.liftup]="openItems()">
         <app-logo></app-logo>
         <label>PIXÖRE</label>
     </div>
 
     
-    <div class="close" [class.need-btn]="openItems" (click)="close()">
+    <div class="close" [class.need-btn]="openItems()" (click)="close()">
         <img src="assets/images/icons/close.svg" alt="Close Icon">
     </div>
+</div>
+
+<div class="lightbox" [class.open]="lightboxOpen()" (click)="closeLightbox()">
+    <img
+        [src]="toDisplay()"
+        class="poster"
+        alt="Lightbox"
+        (click)="$event.stopPropagation()"
+    >
+    @if(lightboxOpen()) {
+        <div class="lightbox-close" (click)="closeLightbox()">
+            <img src="assets/images/icons/close.svg" alt="Close">
+        </div>
+    }
 </div>
 
 <app-noise
