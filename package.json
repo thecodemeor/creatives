@@ -29,7 +29,7 @@
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
     "animejs": "^4.3.6",
-    "mozek-angular": "^0.0.4",
+    "mozek-angular": "^1.0.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
