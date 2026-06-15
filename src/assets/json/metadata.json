@@ -64,17 +64,67 @@
                     "children": [
                         {
                             "id": "1",
-                            "name": "Mercedes",
+                            "name": "Mercedes AMG",
                             "folder": "work/poster/car",
                             "fileType": "png",
-                            "width": 1080,
+                            "width": 800,
                             "height": 800,
                             "tools": [ "photoshop" ],
                             "colors": []
                         },
                         {
                             "id": "2",
-                            "name": "Proton",
+                            "name": "Audi R8",
+                            "folder": "work/poster/car",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "3",
+                            "name": "BMW i8",
+                            "folder": "work/poster/car",
+                            "fileType": "png",
+                            "width": 1088000,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "4",
+                            "name": "Proton Persona",
+                            "folder": "work/poster/car",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "5",
+                            "name": "Proton X50 1",
+                            "folder": "work/poster/car",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "6",
+                            "name": "Proton X50 2",
+                            "folder": "work/poster/car",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "7",
+                            "name": "Proton X50 3",
                             "folder": "work/poster/car",
                             "fileType": "png",
                             "width": 800,
@@ -97,6 +147,66 @@
                             "fileType": "png",
                             "width": 900,
                             "height": 784,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "2",
+                            "name": "Ramadhan Eid",
+                            "folder": "work/poster/festival",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "3",
+                            "name": "Ramadan ET",
+                            "folder": "work/poster/festival",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "4",
+                            "name": "Raya ET",
+                            "folder": "work/poster/festival",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "5",
+                            "name": "Muharram ET",
+                            "folder": "work/poster/festival",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "6",
+                            "name": "National Day ET",
+                            "folder": "work/poster/festival",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "7",
+                            "name": "Maulid ET",
+                            "folder": "work/poster/festival",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
                             "tools": [ "photoshop" ],
                             "colors": []
                         }
@@ -184,7 +294,16 @@
                     "folder": "work/poster",
                     "fileType": "folder",
                     "children": [
-
+                        {
+                            "id": "1",
+                            "name": "Hakim & Areen",
+                            "folder": "work/poster/wedding",
+                            "fileType": "png",
+                            "width": 992,
+                            "height": 1162,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        }
                     ]
                 },
                 {
