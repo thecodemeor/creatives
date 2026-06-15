@@ -34,7 +34,26 @@
                     "folder": "work/poster",
                     "fileType": "folder",
                     "children": [
-
+                        {
+                            "id": "1",
+                            "name": "Spa Package",
+                            "folder": "work/poster/business",
+                            "fileType": "png",
+                            "width": 900,
+                            "height": 1255,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "2",
+                            "name": "UiTM New Intake",
+                            "folder": "work/poster/business",
+                            "fileType": "png",
+                            "width": 1100,
+                            "height": 900,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        }
                     ]
                 },
                 {
@@ -43,7 +62,26 @@
                     "folder": "work/poster",
                     "fileType": "folder",
                     "children": [
-
+                        {
+                            "id": "1",
+                            "name": "Mercedes",
+                            "folder": "work/poster/car",
+                            "fileType": "png",
+                            "width": 1080,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "2",
+                            "name": "Proton",
+                            "folder": "work/poster/car",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        }
                     ]
                 },
                 {
@@ -70,7 +108,46 @@
                     "folder": "work/poster",
                     "fileType": "folder",
                     "children": [
-
+                        {
+                            "id": "1",
+                            "name": "Cafe Offer 1",
+                            "folder": "work/poster/food",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "2",
+                            "name": "Cafe Offer 2",
+                            "folder": "work/poster/food",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "3",
+                            "name": "Cafe Offer 3",
+                            "folder": "work/poster/food",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "4",
+                            "name": "Cafe Offer 4",
+                            "folder": "work/poster/food",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        }
                     ]
                 },
                 {
@@ -108,6 +185,34 @@
                     "fileType": "folder",
                     "children": [
 
+                    ]
+                },
+                {
+                    "id": "8",
+                    "name": "forum",
+                    "folder": "work/poster",
+                    "fileType": "folder",
+                    "children": [
+                        {
+                            "id": "1",
+                            "name": "Vision 2077",
+                            "folder": "work/poster/forum",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "2",
+                            "name": "An Introduction",
+                            "folder": "work/poster/forum",
+                            "fileType": "png",
+                            "width": 900,
+                            "height": 1255,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        }
                     ]
                 }
             ]
