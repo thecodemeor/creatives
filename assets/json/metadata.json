@@ -18,6 +18,46 @@
                     "children": [
                         {
                             "id": "1",
+                            "name": "Go Green",
+                            "folder": "work/poster/awareness",
+                            "fileType": "png",
+                            "width": 900,
+                            "height": 1255,
+                            "tools": [ "illustrator" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "2",
+                            "name": "No Pollution",
+                            "folder": "work/poster/awareness",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "illustrator" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "3",
+                            "name": "Viral Protection",
+                            "folder": "work/poster/awareness",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "illustrator" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "4",
+                            "name": "Stay at Home",
+                            "folder": "work/poster/awareness",
+                            "fileType": "png",
+                            "width": 800,
+                            "height": 800,
+                            "tools": [ "illustrator" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "5",
                             "name": "Climate Action",
                             "folder": "work/poster/awareness",
                             "fileType": "png",
@@ -46,7 +86,7 @@
                         },
                         {
                             "id": "2",
-                            "name": "UiTM New Intake",
+                            "name": "UiTM Intake",
                             "folder": "work/poster/business",
                             "fileType": "png",
                             "width": 1100,
@@ -152,7 +192,7 @@
                         },
                         {
                             "id": "2",
-                            "name": "Ramadhan Eid",
+                            "name": "Ramadhan IIUM",
                             "folder": "work/poster/festival",
                             "fileType": "png",
                             "width": 800,
@@ -220,7 +260,7 @@
                     "children": [
                         {
                             "id": "1",
-                            "name": "Cafe Offer 1",
+                            "name": "Razak Coffee 1",
                             "folder": "work/poster/food",
                             "fileType": "png",
                             "width": 800,
@@ -230,7 +270,7 @@
                         },
                         {
                             "id": "2",
-                            "name": "Cafe Offer 2",
+                            "name": "Razak Coffee 2",
                             "folder": "work/poster/food",
                             "fileType": "png",
                             "width": 800,
@@ -240,7 +280,7 @@
                         },
                         {
                             "id": "3",
-                            "name": "Cafe Offer 3",
+                            "name": "Razak Coffee 3",
                             "folder": "work/poster/food",
                             "fileType": "png",
                             "width": 800,
@@ -250,7 +290,7 @@
                         },
                         {
                             "id": "4",
-                            "name": "Cafe Offer 4",
+                            "name": "Puding Acik",
                             "folder": "work/poster/food",
                             "fileType": "png",
                             "width": 800,
@@ -303,19 +343,29 @@
                             "height": 1162,
                             "tools": [ "photoshop" ],
                             "colors": []
+                        },
+                        {
+                            "id": "2",
+                            "name": "Harith & Arisya",
+                            "folder": "work/poster/wedding",
+                            "fileType": "png",
+                            "width": 992,
+                            "height": 1162,
+                            "tools": [ "photoshop" ],
+                            "colors": []
                         }
                     ]
                 },
                 {
                     "id": "8",
-                    "name": "forum",
+                    "name": "programme",
                     "folder": "work/poster",
                     "fileType": "folder",
                     "children": [
                         {
                             "id": "1",
                             "name": "Vision 2077",
-                            "folder": "work/poster/forum",
+                            "folder": "work/poster/programme",
                             "fileType": "png",
                             "width": 800,
                             "height": 800,
@@ -325,7 +375,17 @@
                         {
                             "id": "2",
                             "name": "An Introduction",
-                            "folder": "work/poster/forum",
+                            "folder": "work/poster/programme",
+                            "fileType": "png",
+                            "width": 900,
+                            "height": 1255,
+                            "tools": [ "photoshop" ],
+                            "colors": []
+                        },
+                        {
+                            "id": "3",
+                            "name": "Bantu ke Syurga",
+                            "folder": "work/poster/programme",
                             "fileType": "png",
                             "width": 900,
                             "height": 1255,
