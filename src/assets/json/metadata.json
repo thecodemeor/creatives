@@ -297,6 +297,16 @@
                             "height": 800,
                             "tools": [ "photoshop" ],
                             "colors": []
+                        },
+                        {
+                            "id": "5",
+                            "name": "Coming Soon",
+                            "folder": "work/poster/food",
+                            "fileType": "png",
+                            "width": 1080,
+                            "height": 800,
+                            "tools": [ "photoshop" ],
+                            "colors": []
                         }
                     ]
                 },
